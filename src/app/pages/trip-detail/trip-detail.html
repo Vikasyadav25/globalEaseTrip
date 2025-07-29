@@ -1,0 +1,195 @@
+<!-- Hero Section -->
+<section class="relative bg-gray-900 text-white">
+  <div class="absolute inset-0">
+    <img [src]="trip?.image" [alt]="trip?.title" class="w-full h-full object-cover opacity-60">
+  </div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div class="max-w-3xl">
+      <div class="flex items-center text-sm mb-4">
+        <i class="fas fa-map-marker-alt mr-2"></i>
+        <span>{{trip?.location}}</span>
+        <span class="mx-2">•</span>
+        <span>{{trip?.duration}}</span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">{{trip?.title}}</h1>
+      <p class="text-xl opacity-90 mb-8">{{trip?.description}}</p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <button class="btn-primary text-lg px-8 py-3">
+          <i class="fas fa-calendar-check mr-2"></i>
+          Book Now - ${{trip?.price}}
+        </button>
+        <button class="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold py-3 px-8 rounded-lg text-lg transition-colors">
+          <i class="fas fa-heart mr-2"></i>
+          Save Trip
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trip Overview -->
+<section class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <!-- Main Content -->
+      <div class="lg:col-span-2">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Trip Overview</h2>
+        <div class="prose max-w-none">
+          <p class="text-gray-600 mb-6">
+            Experience the magic of {{trip?.location}} with our carefully crafted itinerary that combines must-see attractions 
+            with authentic local experiences. This {{trip?.duration}} journey will take you through breathtaking landscapes, 
+            rich cultural sites, and unforgettable adventures.
+          </p>
+          
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">What's Included</h3>
+          <ul class="space-y-2 mb-6">
+            <li class="flex items-center text-gray-600">
+              <i class="fas fa-check text-green-500 mr-3"></i>
+              Accommodation in premium hotels
+            </li>
+            <li class="flex items-center text-gray-600">
+              <i class="fas fa-check text-green-500 mr-3"></i>
+              Daily breakfast and select meals
+            </li>
+            <li class="flex items-center text-gray-600">
+              <i class="fas fa-check text-green-500 mr-3"></i>
+              Professional local guide
+            </li>
+            <li class="flex items-center text-gray-600">
+              <i class="fas fa-check text-green-500 mr-3"></i>
+              All entrance fees and activities
+            </li>
+            <li class="flex items-center text-gray-600">
+              <i class="fas fa-check text-green-500 mr-3"></i>
+              Airport transfers
+            </li>
+            <li class="flex items-center text-gray-600">
+              <i class="fas fa-check text-green-500 mr-3"></i>
+              24/7 customer support
+            </li>
+          </ul>
+
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">What's Not Included</h3>
+          <ul class="space-y-2 mb-6">
+            <li class="flex items-center text-gray-600">
+              <i class="fas fa-times text-red-500 mr-3"></i>
+              International flights
+            </li>
+            <li class="flex items-center text-gray-600">
+              <i class="fas fa-times text-red-500 mr-3"></i>
+              Travel insurance
+            </li>
+            <li class="flex items-center text-gray-600">
+              <i class="fas fa-times text-red-500 mr-3"></i>
+              Personal expenses
+            </li>
+            <li class="flex items-center text-gray-600">
+              <i class="fas fa-times text-red-500 mr-3"></i>
+              Optional activities
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Booking Card -->
+      <div class="lg:col-span-1">
+        <div class="bg-white rounded-lg shadow-lg p-6 sticky top-24">
+          <div class="text-center mb-6">
+            <div class="text-3xl font-bold text-primary-600 mb-2">${{trip?.price}}</div>
+            <div class="text-gray-600">per person</div>
+          </div>
+
+          <div class="space-y-4 mb-6">
+            <div class="flex justify-between">
+              <span class="text-gray-600">Duration:</span>
+              <span class="font-semibold">{{trip?.duration}}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Group Size:</span>
+              <span class="font-semibold">Max 12 people</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Difficulty:</span>
+              <span class="font-semibold">Moderate</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-600">Rating:</span>
+              <div class="flex items-center">
+                <div class="flex text-yellow-400 mr-2">
+                  <i *ngFor="let star of getStarArray(trip?.rating || 0)" class="fas fa-star text-sm"></i>
+                </div>
+                <span class="text-sm text-gray-600">({{trip?.reviews}} reviews)</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="w-full btn-primary py-3 mb-4">
+            <i class="fas fa-calendar-check mr-2"></i>
+            Book This Trip
+          </button>
+
+          <button class="w-full border border-gray-300 text-gray-700 hover:bg-gray-50 py-3 rounded-lg transition-colors">
+            <i class="fab fa-whatsapp mr-2"></i>
+            WhatsApp Inquiry
+          </button>
+
+          <div class="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+            <div class="flex items-center text-green-700 text-sm">
+              <i class="fas fa-users mr-2"></i>
+              <span>Group discount: {{trip?.groupDiscount}}% off for 4+ travelers</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Day by Day Itinerary -->
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-gray-800 mb-12 text-center">Day by Day Itinerary</h2>
+    
+    <div class="space-y-8">
+      <div *ngFor="let day of itinerary; let i = index" class="bg-white rounded-lg shadow-md p-6">
+        <div class="flex items-start">
+          <div class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold mr-6 flex-shrink-0">
+            {{i + 1}}
+          </div>
+          <div class="flex-1">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">{{day.title}}</h3>
+            <p class="text-gray-600 mb-4">{{day.description}}</p>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let activity of day.activities" class="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm">
+                {{activity}}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Google Form Booking -->
+<section class="py-20">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Ready to Book?</h2>
+    <p class="text-xl text-gray-600 mb-8">
+      Fill out our booking form and we'll get back to you within 24 hours with availability and payment options.
+    </p>
+    
+    <button 
+      (click)="openBookingForm()"
+      class="btn-primary text-lg px-8 py-4"
+    >
+      <i class="fab fa-google mr-2"></i>
+      Open Booking Form
+    </button>
+    
+    <p class="text-sm text-gray-500 mt-4">
+      Secure booking process • No payment required to check availability
+    </p>
+  </div>
+</section>
+

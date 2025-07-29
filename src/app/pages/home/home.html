@@ -1,0 +1,176 @@
+<!-- Alert Popup -->
+<app-alert-popup 
+  [isVisible]="showAlert" 
+  (close)="closeAlert()" 
+  (claim)="claimOffer()">
+</app-alert-popup>
+
+<!-- Hero Section -->
+<section class="relative bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
+  <div class="absolute inset-0 bg-black opacity-20"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+    <div class="text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+        Explore Your Next Vikas Adventure
+      </h1>
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
+        Discover breathtaking destinations, create unforgettable memories, and embark on journeys that will change your life forever.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button class="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg text-lg transition-all duration-200 transform hover:scale-105">
+          Explore Trips
+        </button>
+        <button class="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-4 px-8 rounded-lg text-lg transition-all duration-200">
+          Watch Video
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Floating Search Bar -->
+  <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-full max-w-4xl px-4">
+    <div class="bg-white rounded-lg shadow-2xl p-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Destination</label>
+          <input type="text" placeholder="Where to?" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Duration</label>
+          <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+            <option>Any Duration</option>
+            <option>1-3 Days</option>
+            <option>4-7 Days</option>
+            <option>1-2 Weeks</option>
+            <option>2+ Weeks</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Budget</label>
+          <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+            <option>Any Budget</option>
+            <option>Under $500</option>
+            <option>$500 - $1000</option>
+            <option>$1000 - $2000</option>
+            <option>$2000+</option>
+          </select>
+        </div>
+        <div class="flex items-end">
+          <button class="w-full btn-primary py-3">
+            <i class="fas fa-search mr-2"></i>
+            Search Trips
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Travel With Us Section -->
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Why Travel With Us?</h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">We're committed to making your travel dreams come true with exceptional service and unforgettable experiences.</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="text-center group">
+        <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary-200 transition-colors">
+          <i class="fas fa-user-tie text-3xl text-primary-600"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">Expert Guides</h3>
+        <p class="text-gray-600">Our experienced local guides provide insider knowledge and ensure you experience the authentic culture of each destination.</p>
+      </div>
+      
+      <div class="text-center group">
+        <div class="w-20 h-20 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary-200 transition-colors">
+          <i class="fas fa-cog text-3xl text-secondary-600"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">Custom Packages</h3>
+        <p class="text-gray-600">Tailored itineraries designed to match your interests, budget, and travel style for a truly personalized experience.</p>
+      </div>
+      
+      <div class="text-center group">
+        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-200 transition-colors">
+          <i class="fas fa-headset text-3xl text-green-600"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">24/7 Support</h3>
+        <p class="text-gray-600">Round-the-clock assistance throughout your journey, ensuring peace of mind and immediate help when you need it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Trips Section -->
+<section class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Featured Destinations</h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">Discover our most popular trips and start planning your next adventure today.</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <app-trip-card 
+        *ngFor="let trip of featuredTrips" 
+        [trip]="trip"
+        (bookTrip)="onBookTrip($event)">
+      </app-trip-card>
+    </div>
+    
+    <div class="text-center mt-12">
+      <button routerLink="/trips" class="btn-primary text-lg px-8 py-3">
+        View All Trips
+        <i class="fas fa-arrow-right ml-2"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">What Our Travelers Say</h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">Read reviews from our satisfied customers who have experienced unforgettable journeys with us.</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div *ngFor="let testimonial of testimonials" class="bg-white rounded-lg shadow-lg p-8">
+        <div class="flex text-yellow-400 mb-4">
+          <i *ngFor="let star of [1,2,3,4,5]" class="fas fa-star"></i>
+        </div>
+        <p class="text-gray-700 mb-6 italic">"{{testimonial.review}}"</p>
+        <div class="flex items-center">
+          <img [src]="testimonial.avatar" [alt]="testimonial.name" class="w-12 h-12 rounded-full mr-4">
+          <div>
+            <h4 class="font-semibold text-gray-800">{{testimonial.name}}</h4>
+            <p class="text-gray-600 text-sm">{{testimonial.location}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="py-20 bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">Stay Updated</h2>
+    <p class="text-xl mb-8 opacity-90">Get the latest travel deals, destination guides, and exclusive offers delivered to your inbox.</p>
+    
+    <div class="flex flex-col sm:flex-row max-w-md mx-auto">
+      <input 
+        type="email" 
+        placeholder="Enter your email address" 
+        class="flex-1 px-6 py-4 rounded-l-lg sm:rounded-r-none rounded-r-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white"
+      >
+      <button class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-r-lg sm:rounded-l-none rounded-l-lg font-semibold transition-colors">
+        Subscribe
+      </button>
+    </div>
+    
+    <p class="text-sm mt-4 opacity-75">No spam, unsubscribe at any time.</p>
+  </div>
+</section>
+

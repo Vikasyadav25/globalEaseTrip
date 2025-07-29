@@ -1,0 +1,158 @@
+<!-- Page Header -->
+<section class="bg-gradient-to-r from-primary-600 to-secondary-600 text-white py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Discover Amazing Trips</h1>
+      <p class="text-xl opacity-90 max-w-2xl mx-auto">
+        Choose from our carefully curated collection of unforgettable travel experiences around the world.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Filters Section -->
+<section class="py-8 bg-white shadow-sm sticky top-16 z-40">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
+      <!-- Search -->
+      <div class="flex-1 max-w-md">
+        <div class="relative">
+          <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+          <input 
+            type="text" 
+            placeholder="Search destinations..." 
+            [(ngModel)]="searchTerm"
+            (input)="applyFilters()"
+            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+          >
+        </div>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="flex flex-wrap gap-2">
+        <select 
+          [(ngModel)]="selectedLocation" 
+          (change)="applyFilters()"
+          class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+        >
+          <option value="">All Locations</option>
+          <option *ngFor="let location of uniqueLocations" [value]="location">{{location}}</option>
+        </select>
+
+        <select 
+          [(ngModel)]="selectedDuration" 
+          (change)="applyFilters()"
+          class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+        >
+          <option value="">Any Duration</option>
+          <option value="1-3">1-3 Days</option>
+          <option value="4-7">4-7 Days</option>
+          <option value="8-14">1-2 Weeks</option>
+          <option value="15+">2+ Weeks</option>
+        </select>
+
+        <select 
+          [(ngModel)]="selectedPriceRange" 
+          (change)="applyFilters()"
+          class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+        >
+          <option value="">Any Budget</option>
+          <option value="0-500">Under $500</option>
+          <option value="500-1000">$500 - $1000</option>
+          <option value="1000-2000">$1000 - $2000</option>
+          <option value="2000+">$2000+</option>
+        </select>
+
+        <button 
+          (click)="clearFilters()"
+          class="px-4 py-2 text-gray-600 hover:text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+        >
+          <i class="fas fa-times mr-2"></i>Clear
+        </button>
+      </div>
+
+      <!-- Sort -->
+      <div class="flex items-center gap-2">
+        <span class="text-gray-600 text-sm">Sort by:</span>
+        <select 
+          [(ngModel)]="sortBy" 
+          (change)="applySorting()"
+          class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+        >
+          <option value="featured">Featured</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="rating">Highest Rated</option>
+          <option value="duration">Duration</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Results Count -->
+    <div class="mt-4 text-gray-600">
+      Showing {{filteredTrips.length}} of {{allTrips.length}} trips
+    </div>
+  </div>
+</section>
+
+<!-- Trips Grid -->
+<section class="py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="text-center py-12">
+      <i class="fas fa-spinner fa-spin text-4xl text-primary-600 mb-4"></i>
+      <p class="text-gray-600">Loading amazing trips...</p>
+    </div>
+
+    <!-- No Results -->
+    <div *ngIf="!isLoading && filteredTrips.length === 0" class="text-center py-12">
+      <i class="fas fa-search text-6xl text-gray-300 mb-4"></i>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-2">No trips found</h3>
+      <p class="text-gray-600 mb-6">Try adjusting your filters or search terms.</p>
+      <button (click)="clearFilters()" class="btn-primary">
+        Clear All Filters
+      </button>
+    </div>
+
+    <!-- Trips Grid -->
+    <div *ngIf="!isLoading && filteredTrips.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <app-trip-card 
+        *ngFor="let trip of filteredTrips; trackBy: trackByTripId" 
+        [trip]="trip"
+        (bookTrip)="onBookTrip($event)">
+      </app-trip-card>
+    </div>
+
+    <!-- Load More Button -->
+    <div *ngIf="!isLoading && filteredTrips.length > 0 && hasMoreTrips" class="text-center mt-12">
+      <button 
+        (click)="loadMoreTrips()"
+        class="btn-secondary px-8 py-3"
+      >
+        Load More Trips
+        <i class="fas fa-chevron-down ml-2"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Can't Find What You're Looking For?</h2>
+    <p class="text-xl text-gray-600 mb-8">
+      Let us create a custom itinerary tailored specifically to your preferences and budget.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <button routerLink="/contact" class="btn-primary">
+        <i class="fas fa-envelope mr-2"></i>
+        Contact Us
+      </button>
+      <button class="btn-secondary">
+        <i class="fab fa-whatsapp mr-2"></i>
+        WhatsApp Chat
+      </button>
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,128 @@
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-primary-600 to-secondary-600 text-white py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Travel Blog</h1>
+      <p class="text-xl opacity-90 max-w-3xl mx-auto">
+        Discover travel tips, destination guides, and inspiring stories from fellow adventurers around the world.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Article -->
+<section class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-12">
+      <h2 class="text-3xl font-bold text-gray-800 mb-8">Featured Article</h2>
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="md:flex">
+          <div class="md:w-1/2">
+            <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&h=400&fit=crop" alt="Featured article" class="w-full h-64 md:h-full object-cover">
+          </div>
+          <div class="md:w-1/2 p-8">
+            <div class="flex items-center text-sm text-gray-500 mb-4">
+              <span>Travel Tips</span>
+              <span class="mx-2">•</span>
+              <span>March 15, 2024</span>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">10 Essential Travel Tips for First-Time International Travelers</h3>
+            <p class="text-gray-600 mb-6">
+              Planning your first international trip can be overwhelming. From passport requirements to packing essentials, 
+              we've compiled the most important tips to ensure your journey is smooth and memorable.
+            </p>
+            <button class="btn-primary">
+              Read Full Article
+              <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog Categories -->
+<section class="py-12 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Browse by Category</h2>
+    </div>
+    
+    <div class="flex flex-wrap justify-center gap-4">
+      <button 
+        *ngFor="let category of categories" 
+        (click)="selectCategory(category)"
+        [class.bg-primary-600]="selectedCategory === category"
+        [class.text-white]="selectedCategory === category"
+        [class.bg-white]="selectedCategory !== category"
+        [class.text-gray-700]="selectedCategory !== category"
+        class="px-6 py-3 rounded-lg border border-gray-300 hover:bg-primary-600 hover:text-white transition-colors"
+      >
+        {{category}}
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Blog Articles Grid -->
+<section class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <article *ngFor="let article of filteredArticles" class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+        <img [src]="article.image" [alt]="article.title" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <div class="flex items-center text-sm text-gray-500 mb-3">
+            <span>{{article.category}}</span>
+            <span class="mx-2">•</span>
+            <span>{{article.date}}</span>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-800 mb-3 line-clamp-2">{{article.title}}</h3>
+          <p class="text-gray-600 mb-4 line-clamp-3">{{article.excerpt}}</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <img [src]="article.author.avatar" [alt]="article.author.name" class="w-8 h-8 rounded-full mr-3">
+              <span class="text-sm text-gray-700">{{article.author.name}}</span>
+            </div>
+            <button class="text-primary-600 hover:text-primary-700 font-medium text-sm">
+              Read More
+              <i class="fas fa-arrow-right ml-1"></i>
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Load More Button -->
+    <div class="text-center mt-12">
+      <button class="btn-secondary px-8 py-3">
+        Load More Articles
+        <i class="fas fa-chevron-down ml-2"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter Signup -->
+<section class="py-20 bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-bold mb-4">Never Miss a Travel Story</h2>
+    <p class="text-xl mb-8 opacity-90">
+      Subscribe to our newsletter and get the latest travel tips, destination guides, and exclusive offers delivered to your inbox.
+    </p>
+    
+    <div class="flex flex-col sm:flex-row max-w-md mx-auto">
+      <input 
+        type="email" 
+        placeholder="Enter your email address" 
+        class="flex-1 px-6 py-4 rounded-l-lg sm:rounded-r-none rounded-r-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white"
+      >
+      <button class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-r-lg sm:rounded-l-none rounded-l-lg font-semibold transition-colors">
+        Subscribe
+      </button>
+    </div>
+    
+    <p class="text-sm mt-4 opacity-75">Join 10,000+ travelers who trust our recommendations.</p>
+  </div>
+</section>
+
