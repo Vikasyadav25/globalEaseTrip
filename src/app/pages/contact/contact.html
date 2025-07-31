@@ -1,10 +1,15 @@
 <!-- Hero Section -->
-<section class="bg-gradient-to-r from-primary-600 to-secondary-600 text-white py-20">
+<!-- <section class="bg-blue-600 from-primary-600 to-secondary-600 text-white py-20"> -->
+  <img src="assets/images/Image.png" alt="Test image" />
+  <img src="assets/Image2.png" />
+<section class="relative bg-cover bg-center bg-no-repeat text-white py-20"
+  style="background-image: url('assets/images/Image.png');">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-6">Let’s Start Your Journey</h1>
       <p class="text-xl opacity-90 max-w-3xl mx-auto">
-      Have questions or ideas for your next trip? Reach out to us today our travel experts are ready to help you plan a seamless, personalized adventure.
+        Have questions or ideas for your next trip? Reach out to us today our travel experts are ready to help you plan
+        a seamless, personalized adventure.
       </p>
     </div>
   </div>
@@ -15,7 +20,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
       <!-- Contact Info -->
-      <div>
+      <!-- <div>
         <h2 class="text-3xl font-bold text-gray-800 mb-8">Contact Information</h2>
         
         <div class="space-y-6">
@@ -62,17 +67,12 @@
             </div>
           </div>
         </div>
-
-        <!-- Social Media -->
         <div class="mt-8">
           <h3 class="text-lg font-semibold text-gray-800 mb-4">Follow Us</h3>
           <div class="flex space-x-4">
             <a href="https://www.facebook.com/share/1BVHv12KJ7/" target="_blank"   class="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors">
               <i class="fab fa-facebook-f"></i>
             </a>
-            <!-- <a href="#" class="w-10 h-10 bg-blue-400 text-white rounded-lg flex items-center justify-center hover:bg-blue-500 transition-colors">
-              <i class="fab fa-twitter"></i>
-            </a> -->
             <a href="https://www.instagram.com/globaleasetrip/" target="_blank"  class="w-10 h-10 bg-pink-600 text-white rounded-lg flex items-center justify-center hover:bg-pink-700 transition-colors">
               <i class="fab fa-instagram"></i>
             </a>
@@ -81,73 +81,45 @@
             </a>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Contact Form -->
-      <div>
-        <h2 class="text-3xl font-bold text-gray-800 mb-8">Send Us a Message</h2>        
-        <form  class="space-y-6" [formGroup]="form" (ngSubmit)="onSubmit()" >
+      <div class="border border-gray-200 rounded-lg p-6 shadow-lg">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">Send Us a Message</h2>
+        <form class="space-y-6" [formGroup]="form" (ngSubmit)="onSubmit()">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label for="firstName"  class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
-              <input 
-                type="text" 
-                id="firstName" 
-                name="firstName" 
-                required
-                formControlName="firstName"
+              <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+              <input type="text" id="firstName" name="firstName" required formControlName="firstName"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                placeholder="Your first name"
-              >
+                placeholder="Your first name">
             </div>
             <div>
               <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
-              <input 
-                type="text" 
-                id="lastName" 
-                name="lastName" 
-                required
-                formControlName="lastName"
+              <input type="text" id="lastName" name="lastName" required formControlName="lastName"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                placeholder="Your last name"
-              >
+                placeholder="Your last name">
             </div>
           </div>
-          
+
           <div>
             <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              required
-              formControlName="email"
+            <input type="email" id="email" name="email" required formControlName="email"
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              placeholder="your.email@example.com"
-            >
+              placeholder="your.email@example.com">
           </div>
-          
+
           <div>
             <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-            <input 
-              type="tel" 
-              id="phone" 
-              name="phone"
-              formControlName="phone"
+            <input type="tel" id="phone" name="phone" formControlName="phone"
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              placeholder="+1 (555) 123-4567"
-            >
+              placeholder="+1 (555) 123-4567">
           </div>
-          
+
           <div>
             <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject *</label>
-            <select 
-              id="subject" 
-              name="subject" 
-              required
-              formControlName="subject"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-            >
+            <select id="subject" name="subject" required formControlName="subject"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
               <option value="">Select a subject</option>
               <option value="general">General Inquiry</option>
               <option value="booking">Trip Booking</option>
@@ -156,37 +128,23 @@
               <option value="support">Customer Support</option>
             </select>
           </div>
-          
+
           <div>
             <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message *</label>
-            <textarea 
-              id="message" 
-              name="message" 
-              rows="6" 
-              required
-              formControlName="message"
+            <textarea id="message" name="message" rows="6" required formControlName="message"
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              placeholder="Tell us about your travel plans, preferences, and any questions you have..."
-            ></textarea>
+              placeholder="Tell us about your travel plans, preferences, and any questions you have..."></textarea>
           </div>
-          
+
           <div class="flex items-start">
-            <input 
-              type="checkbox" 
-              id="newsletter" 
-              name="newsletter"
-              formControlName="newsletter"
-              class="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
-            >
+            <input type="checkbox" id="newsletter" name="newsletter" formControlName="newsletter"
+              class="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
             <label for="newsletter" class="ml-2 text-sm text-gray-600">
               I'd like to receive travel tips and special offers via email
             </label>
           </div>
-          
-          <button 
-            type="submit"
-            class="w-full btn-primary py-3 text-lg"
-          >
+
+          <button type="submit" class="w-full btn-primary py-3 text-lg">
             <i class="fas fa-paper-plane mr-2"></i>
             Send Message
           </button>
@@ -194,47 +152,59 @@
       </div>
 
       <!-- Google Form Alternative -->
+      <div class="border border-gray-200 rounded-lg p-6 shadow-lg max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">Quick Booking Form</h2>
+          <p class="text-xl text-gray-600">
+            For faster booking, you can also use our Google Form below or click the button to open it in a new window.
+          </p>
+        </div>
 
+        <div class="bg-white rounded-lg shadow-lg p-8">
+          <div class="text-center mb-6">
+            <button (click)="openGoogleForm()" class="btn-primary text-lg px-8 py-3">
+              <i class="fab fa-google mr-2"></i>
+              Open Booking Form
+            </button>
+          </div>
+
+          <!-- Embedded Google Form Placeholder -->
+          <div class="bg-gray-100 rounded-lg p-8 text-center">
+            <i class="fas fa-external-link-alt text-4xl text-gray-400 mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-700 mb-2">Google Form Integration</h3>
+            <p class="text-gray-600 mb-4">
+              Click the button above to access our detailed booking form where you can specify your travel.
+            </p>
+            <ul class="space-y-2 text-sm text-muted-foreground text-left">
+              <li
+                class="flex items-start before:content-['•'] before:text-primary before:text-xl before:leading-5 before:mr-2">
+                <p class="text-sm text-gray-500">Travel preferences and accommodation type</p>
+              </li>
+              <li
+                class="flex items-start before:content-['•'] before:text-primary before:text-xl before:leading-5 before:mr-2">
+                <p class="text-sm text-gray-500">Detailed dates and flexible options</p>
+              </li>
+              <li
+                class="flex items-start before:content-['•'] before:text-primary before:text-xl before:leading-5 before:mr-2">
+                <p class="text-sm text-gray-500">Budget range and payment preferences</p>
+              </li>
+              <li
+                class="flex items-start before:content-['•'] before:text-primary before:text-xl before:leading-5 before:mr-2">
+                <p class="text-sm text-gray-500">Activity preferences and special requirements</p>
+              </li>
+              <li
+                class="flex items-start before:content-['•'] before:text-primary before:text-xl before:leading-5 before:mr-2">
+                <p class="text-sm text-gray-500">Group details and accessibility needs</p>
+              </li>
+            </ul>
+          </div>
+
+
+        </div>
+      </div>
     </div>
   </div>
 </section>
-
-<!-- Google Form Alternative -->
-<section class="py-20 bg-gray-50">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">Quick Booking Form</h2>
-      <p class="text-xl text-gray-600">
-        For faster booking, you can also use our Google Form below or click the button to open it in a new window.
-      </p>
-    </div>
-    
-    <div class="bg-white rounded-lg shadow-lg p-8">
-      <div class="text-center mb-6">
-        <button 
-          (click)="openGoogleForm()"
-          class="btn-primary text-lg px-8 py-3"
-        >
-          <i class="fab fa-google mr-2"></i>
-          Open Booking Form
-        </button>
-      </div>
-      
-      <!-- Embedded Google Form Placeholder -->
-      <div class="bg-gray-100 rounded-lg p-8 text-center">
-        <i class="fas fa-external-link-alt text-4xl text-gray-400 mb-4"></i>
-        <h3 class="text-xl font-semibold text-gray-700 mb-2">Google Form Integration</h3>
-        <p class="text-gray-600 mb-4">
-          Click the button above to access our detailed booking form where you can specify your travel preferences, dates, and requirements.
-        </p>
-        <p class="text-sm text-gray-500">
-          The form will open in a new window for your convenience.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- FAQ Section -->
 <section class="py-20">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -244,28 +214,24 @@
         Quick answers to common questions about our services.
       </p>
     </div>
-    
-    <div class="space-y-6">
-      <div class="bg-white rounded-lg shadow-md p-6">
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">How far in advance should I book my trip?</h3>
-        <p class="text-gray-600">We recommend booking at least 2-3 months in advance for international trips and 4-6 weeks for domestic travel to ensure the best availability and prices.</p>
-      </div>
-      
-      <div class="bg-white rounded-lg shadow-md p-6">
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">Do you offer travel insurance?</h3>
-        <p class="text-gray-600">Yes, we partner with leading travel insurance providers to offer comprehensive coverage options for your peace of mind.</p>
-      </div>
-      
-      <div class="bg-white rounded-lg shadow-md p-6">
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">Can you create custom itineraries?</h3>
-        <p class="text-gray-600">Absolutely! We specialize in creating personalized travel experiences tailored to your interests, budget, and schedule.</p>
-      </div>
-      
-      <div class="bg-white rounded-lg shadow-md p-6">
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">What's included in your group discounts?</h3>
-        <p class="text-gray-600">Groups of 4 or more travelers receive discounts on accommodations, activities, and transportation. The exact discount varies by destination and season.</p>
+    <!-- FAQ Section -->
+    <div class="space-y-4 max-w-2xl mx-auto">
+      <div *ngFor="let faq of faqs; let i = index"
+        class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden transition-all duration-300">
+        <button (click)="toggleAnswer(i)"
+          class="w-full px-6 py-4 flex justify-between items-center text-left text-gray-800 font-medium focus:outline-none">
+          <span>{{ faq.question }}</span>
+          <svg class="w-5 h-5 transform transition-transform duration-300" [ngClass]="{ 'rotate-180': openedIndex === i }"
+            fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div *ngIf="openedIndex === i" class="px-6 pb-4 text-gray-600 transition-all duration-300">
+          {{ faq.answer }}
+        </div>
       </div>
     </div>
+
+
   </div>
 </section>
-
