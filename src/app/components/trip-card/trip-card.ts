@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 export interface Trip {
   id: string;
@@ -12,13 +13,14 @@ export interface Trip {
   rating: number;
   reviews: number;
   features: string[];
+  category?: string;
   groupDiscount?: number;
 }
 
 @Component({
   selector: 'app-trip-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './trip-card.html',
   styleUrl: './trip-card.css'
 })

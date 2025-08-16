@@ -10,82 +10,151 @@
         <span>{{trip?.location}}</span>
         <span class="mx-2">•</span>
         <span>{{trip?.duration}}</span>
+        <span class="mx-2">•</span>
+        <span *ngIf="trip?.category">{{trip?.category}}</span>
       </div>
       <h1 class="text-4xl md:text-5xl font-bold mb-6">{{trip?.title}}</h1>
       <p class="text-xl opacity-90 mb-8">{{trip?.description}}</p>
+
+      <!-- Rating and Reviews -->
+      <div class="flex items-center mb-8">
+        <div class="flex text-yellow-400 mr-3">
+          <i *ngFor="let star of getStarArray(trip?.rating || 0)" class="fas fa-star"></i>
+          <i *ngFor="let star of getEmptyStarArray(trip?.rating || 0)" class="far fa-star"></i>
+        </div>
+        <span class="text-lg">{{trip?.rating}} ({{trip?.reviews}} reviews)</span>
+      </div>
+
       <div class="flex flex-col sm:flex-row gap-4">
-        <button class="btn-primary text-lg px-8 py-3">
+        <button (click)="openBookingForm()" class="btn-primary text-lg px-8 py-3">
           <i class="fas fa-calendar-check mr-2"></i>
-          Book Now - ${{trip?.price}}
+          Book Now - ₹{{trip?.price | number}}
         </button>
-        <button class="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold py-3 px-8 rounded-lg text-lg transition-colors">
-          <i class="fas fa-heart mr-2"></i>
-          Save Trip
+        <button (click)="shareTrip()"
+          class="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold py-3 px-8 rounded-lg text-lg transition-colors">
+          <i class="fas fa-share mr-2"></i>
+          Share Trip
         </button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Trip Overview -->
+<!-- Navigation Tabs -->
+<section class="bg-white border-b sticky top-16 z-40">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="flex space-x-8">
+      <button *ngFor="let tab of ['overview', 'itinerary', 'inclusions']" (click)="selectedTab = tab" [class]="selectedTab === tab ? 
+          'border-primary-600 text-primary-600' : 
+          'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+        class="py-4 px-1 border-b-2 font-medium text-sm capitalize transition-colors">
+        {{tab}}
+      </button>
+    </nav>
+  </div>
+</section>
+
+<!-- Main Content -->
 <section class="py-20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-      <!-- Main Content -->
+      <!-- Tab Content -->
       <div class="lg:col-span-2">
-        <h2 class="text-3xl font-bold text-gray-800 mb-6">Trip Overview</h2>
-        <div class="prose max-w-none">
-          <p class="text-gray-600 mb-6">
-            Experience the magic of {{trip?.location}} with our carefully crafted itinerary that combines must-see attractions 
-            with authentic local experiences. This {{trip?.duration}} journey will take you through breathtaking landscapes, 
-            rich cultural sites, and unforgettable adventures.
-          </p>
-          
-          <h3 class="text-xl font-semibold text-gray-800 mb-4">What's Included</h3>
-          <ul class="space-y-2 mb-6">
-            <li class="flex items-center text-gray-600">
-              <i class="fas fa-check text-green-500 mr-3"></i>
-              Accommodation in premium hotels
-            </li>
-            <li class="flex items-center text-gray-600">
-              <i class="fas fa-check text-green-500 mr-3"></i>
-              Daily breakfast and select meals
-            </li>
-            <li class="flex items-center text-gray-600">
-              <i class="fas fa-check text-green-500 mr-3"></i>
-              Professional local guide
-            </li>
-            <li class="flex items-center text-gray-600">
-              <i class="fas fa-check text-green-500 mr-3"></i>
-              All entrance fees and activities
-            </li>
-            <li class="flex items-center text-gray-600">
-              <i class="fas fa-check text-green-500 mr-3"></i>
-              Airport transfers
-            </li>
-            <li class="flex items-center text-gray-600">
-              <i class="fas fa-check text-green-500 mr-3"></i>
-              24/7 customer support
-            </li>
-          </ul>
+
+        <!-- Overview Tab -->
+        <div *ngIf="selectedTab === 'overview'">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">Trip Overview</h2>
+          <div class="prose max-w-none">
+            <p class="text-gray-600 mb-6 text-lg leading-relaxed">
+              {{trip?.description}}
+            </p>
+
+            <!-- Features -->
+            <div class="mb-8">
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">Trip Highlights</h3>
+              <div class="grid grid-cols-2 gap-4">
+                <div *ngFor="let feature of trip?.features" class="flex items-center p-3 bg-gray-50 rounded-lg">
+                  <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                  <span class="font-medium">{{feature}}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group Discount -->
+            <div *ngIf="trip?.groupDiscount" class="bg-secondary-50 border border-secondary-200 rounded-lg p-6 mb-8">
+              <h3 class="text-lg font-semibold text-secondary-800 mb-2">
+                <i class="fas fa-users mr-2"></i>
+                Group Discount Available
+              </h3>
+              <p class="text-secondary-700">
+                Save {{trip?.groupDiscount}}% when you book for 4 or more travelers. Perfect for families and friend
+                groups!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Itinerary Tab -->
+        <div *ngIf="selectedTab === 'itinerary'">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">Day by Day Itinerary</h2>
+          <div class="space-y-6">
+            <div *ngFor="let day of getCurrentTripData()?.itinerary"
+              class="bg-white border border-gray-200 rounded-lg p-6">
+              <div class="flex items-start">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold mr-6 flex-shrink-0">
+                  {{day.day}}
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-xl font-semibold text-gray-800 mb-2">Day {{day.day}}: {{day.title}}</h3>
+                  <p class="text-gray-600 mb-4">{{day.description}}</p>
+                  <div class="flex flex-wrap gap-2">
+                    <span *ngFor="let activity of day.activities"
+                      class="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm">
+                      {{activity}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inclusions Tab -->
+        <div *ngIf="selectedTab === 'inclusions'">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">What's Included</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div *ngFor="let inclusion of getCurrentTripData()?.inclusions"
+              class="flex items-start p-4 bg-green-50 border border-green-200 rounded-lg">
+              <i [class]="inclusion.icon + ' text-green-600 text-xl mr-4 mt-1'"></i>
+              <div>
+                <h4 class="font-semibold text-gray-800 mb-1">{{inclusion.title}}</h4>
+                <p class="text-gray-600 text-sm">{{inclusion.description}}</p>
+              </div>
+            </div>
+          </div>
 
           <h3 class="text-xl font-semibold text-gray-800 mb-4">What's Not Included</h3>
-          <ul class="space-y-2 mb-6">
+          <ul class="space-y-2">
             <li class="flex items-center text-gray-600">
               <i class="fas fa-times text-red-500 mr-3"></i>
-              International flights
+              International flights (can be arranged separately)
             </li>
             <li class="flex items-center text-gray-600">
               <i class="fas fa-times text-red-500 mr-3"></i>
-              Travel insurance
+              Travel insurance (recommended)
             </li>
             <li class="flex items-center text-gray-600">
               <i class="fas fa-times text-red-500 mr-3"></i>
-              Personal expenses
+              Personal expenses and shopping
             </li>
             <li class="flex items-center text-gray-600">
               <i class="fas fa-times text-red-500 mr-3"></i>
-              Optional activities
+              Optional activities not mentioned in itinerary
+            </li>
+            <li class="flex items-center text-gray-600">
+              <i class="fas fa-times text-red-500 mr-3"></i>
+              Tips and gratuities
             </li>
           </ul>
         </div>
@@ -93,10 +162,13 @@
 
       <!-- Booking Card -->
       <div class="lg:col-span-1">
-        <div class="bg-white rounded-lg shadow-lg p-6 sticky top-24">
+        <div class="bg-white rounded-lg shadow-lg p-6 sticky top-32">
           <div class="text-center mb-6">
-            <div class="text-3xl font-bold text-primary-600 mb-2">${{trip?.price}}</div>
+            <div class="text-3xl font-bold text-primary-600 mb-2">₹{{trip?.price | number}}</div>
             <div class="text-gray-600">per person</div>
+            <div *ngIf="trip?.groupDiscount" class="text-sm text-green-600 mt-1">
+              Save {{trip?.groupDiscount}}% for groups of 4+
+            </div>
           </div>
 
           <div class="space-y-4 mb-6">
@@ -106,37 +178,48 @@
             </div>
             <div class="flex justify-between">
               <span class="text-gray-600">Group Size:</span>
-              <span class="font-semibold">Max 12 people</span>
+              <span class="font-semibold">Max 15 people</span>
             </div>
             <div class="flex justify-between">
-              <span class="text-gray-600">Difficulty:</span>
-              <span class="font-semibold">Moderate</span>
+              <span class="text-gray-600">Category:</span>
+              <span class="font-semibold">{{trip?.category}}</span>
             </div>
             <div class="flex justify-between items-center">
               <span class="text-gray-600">Rating:</span>
               <div class="flex items-center">
                 <div class="flex text-yellow-400 mr-2">
                   <i *ngFor="let star of getStarArray(trip?.rating || 0)" class="fas fa-star text-sm"></i>
+                  <i *ngFor="let star of getEmptyStarArray(trip?.rating || 0)" class="far fa-star text-sm"></i>
                 </div>
-                <span class="text-sm text-gray-600">({{trip?.reviews}} reviews)</span>
+                <span class="text-sm text-gray-600">{{trip?.rating}}</span>
               </div>
             </div>
           </div>
 
-          <button class="w-full btn-primary py-3 mb-4">
+          <button (click)="openBookingForm()" class="w-full btn-primary py-3 mb-4">
             <i class="fas fa-calendar-check mr-2"></i>
             Book This Trip
           </button>
 
-          <button class="w-full border border-gray-300 text-gray-700 hover:bg-gray-50 py-3 rounded-lg transition-colors">
-            <i class="fab fa-whatsapp mr-2"></i>
+          <button
+            class="w-full border border-gray-300 text-gray-700 hover:bg-gray-50 py-3 rounded-lg transition-colors mb-4">
+            <i class="fab fa-whatsapp mr-2 text-green-500"></i>
             WhatsApp Inquiry
           </button>
 
-          <div class="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-            <div class="flex items-center text-green-700 text-sm">
-              <i class="fas fa-users mr-2"></i>
-              <span>Group discount: {{trip?.groupDiscount}}% off for 4+ travelers</span>
+          <button routerLink="/contact"
+            class="w-full border border-gray-300 text-gray-700 hover:bg-gray-50 py-3 rounded-lg transition-colors">
+            <i class="fas fa-envelope mr-2"></i>
+            Get Custom Quote
+          </button>
+
+          <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div class="text-center">
+              <i class="fas fa-shield-alt text-blue-600 text-2xl mb-2"></i>
+              <h4 class="font-semibold text-blue-800 mb-1">Secure Booking</h4>
+              <p class="text-blue-700 text-sm">
+                No payment required to check availability. Secure payment options available.
+              </p>
             </div>
           </div>
         </div>
@@ -145,51 +228,25 @@
   </div>
 </section>
 
-<!-- Day by Day Itinerary -->
-<section class="py-20 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-bold text-gray-800 mb-12 text-center">Day by Day Itinerary</h2>
-    
-    <div class="space-y-8">
-      <div *ngFor="let day of itinerary; let i = index" class="bg-white rounded-lg shadow-md p-6">
-        <div class="flex items-start">
-          <div class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold mr-6 flex-shrink-0">
-            {{i + 1}}
-          </div>
-          <div class="flex-1">
-            <h3 class="text-xl font-semibold text-gray-800 mb-2">{{day.title}}</h3>
-            <p class="text-gray-600 mb-4">{{day.description}}</p>
-            <div class="flex flex-wrap gap-2">
-              <span *ngFor="let activity of day.activities" class="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm">
-                {{activity}}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Google Form Booking -->
-<section class="py-20">
+<!-- Call to Action -->
+<section class="py-16 bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="text-3xl font-bold text-gray-800 mb-4">Ready to Book?</h2>
-    <p class="text-xl text-gray-600 mb-8">
-      Fill out our booking form and we'll get back to you within 24 hours with availability and payment options.
+    <h2 class="text-3xl font-bold mb-4">Ready for Your Next Adventure?</h2>
+    <p class="text-xl opacity-90 mb-8">
+      Join thousands of satisfied travelers who have experienced the magic of our carefully crafted journeys.
     </p>
-    
-    <button 
-      (click)="openBookingForm()"
-      class="btn-primary text-lg px-8 py-4"
-    >
-      <i class="fab fa-google mr-2"></i>
-      Open Booking Form
-    </button>
-    
-    <p class="text-sm text-gray-500 mt-4">
-      Secure booking process • No payment required to check availability
-    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <button (click)="openBookingForm()"
+        class="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg text-lg transition-colors">
+        <i class="fas fa-calendar-check mr-2"></i>
+        Book Now
+      </button>
+      <button routerLink="/trips"
+        class="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-3 px-8 rounded-lg text-lg transition-colors">
+        <i class="fas fa-search mr-2"></i>
+        Explore More Trips
+      </button>
+    </div>
   </div>
 </section>
-
