@@ -37,7 +37,7 @@ export class TripsComponent implements OnInit {
       groupDiscount: 10
     },
     {
-      id: 'andaman-paradise',
+      id: 'andaman-island-paradise',
       title: 'Andaman Island Paradise',
       description: 'Pristine turquoise waters, coral reefs, exotic marine life and white sandy beaches. A diver\'s paradise and a honeymooner\'s dream!',
       location: 'Andaman Islands, India',
@@ -63,7 +63,7 @@ export class TripsComponent implements OnInit {
       category: 'Beach Getaways'
     },
     {
-      id: 'pondicherry-coastal',
+      id: 'pondicherry-coastal-bliss',
       title: 'Pondicherry Coastal Bliss',
       description: 'A mini France in India! Known for clean beaches, bohemian cafes, yoga retreats, and colorful colonial streets.',
       location: 'Pondicherry, India',
@@ -76,7 +76,7 @@ export class TripsComponent implements OnInit {
       category: 'Beach Getaways'
     },
     {
-      id: 'alleppey-houseboat',
+      id: 'alleppey-houseboat-escape',
       title: 'Alleppey Houseboat Escape',
       description: 'Experience Kerala\'s famous backwaters on a luxury houseboat. Reconnect with nature as you glide through palm-fringed canals.',
       location: 'Kerala, India',
@@ -86,6 +86,32 @@ export class TripsComponent implements OnInit {
       rating: 4.6,
       reviews: 198,
       features: ['Houseboat', 'Backwaters', 'Local Cuisine', 'Village Visit'],
+      category: 'Beach Getaways'
+    },
+    {
+      id: 'varkala-cliff-beach-tour',
+      title: 'Varkala Cliff & Beach Tour',
+      description: 'Wellness meets the sea. A peaceful destination perfect for yoga, meditation and ocean lovers.',
+      location: 'Varkala, Kerala',
+      duration: '4 Days',
+      price: 8999,
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop',
+      rating: 4.4,
+      reviews: 112,
+      features: ['Cliff Views', 'Yoga', 'Ayurveda', 'Beach'],
+      category: 'Beach Getaways'
+    },
+    {
+      id: 'gokarna-beach-trek-camp',
+      title: 'Gokarna Beach Trek & Camp',
+      description: 'A blend of spiritual town and serene beaches. Ideal for backpackers and campers looking for peace.',
+      location: 'Gokarna, Karnataka',
+      duration: '2 Days',
+      price: 6499,
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop',
+      rating: 4.3,
+      reviews: 89,
+      features: ['Beach Camping', 'Trekking', 'Bonfire', 'Spiritual'],
       category: 'Beach Getaways'
     },
 
@@ -105,7 +131,7 @@ export class TripsComponent implements OnInit {
       groupDiscount: 15
     },
     {
-      id: 'kashmir-tour',
+      id: 'mesmerizing-kashmir-tour',
       title: 'Mesmerizing Kashmir Tour',
       description: 'Experience the "Heaven on Earth" with snow-covered peaks, colorful gardens, and houseboat luxury.',
       location: 'Kashmir, India',
@@ -120,7 +146,7 @@ export class TripsComponent implements OnInit {
 
     // Heritage & Culture
     {
-      id: 'royal-rajasthan',
+      id: 'royal-rajasthan-tour',
       title: 'Royal Rajasthan Tour',
       description: 'A perfect blend of vibrant colors, royal palaces, traditional markets, and heritage experiences.',
       location: 'Rajasthan, India',
@@ -134,7 +160,7 @@ export class TripsComponent implements OnInit {
       groupDiscount: 12
     },
     {
-      id: 'varanasi-spiritual',
+      id: 'varanasi-sarnath-spiritual-journey',
       title: 'Varanasi - Sarnath Spiritual Journey',
       description: 'Dive into India\'s spiritual heart, witness ancient rituals and connect with timeless traditions.',
       location: 'Varanasi, India',
@@ -147,7 +173,33 @@ export class TripsComponent implements OnInit {
       category: 'Heritage & Culture'
     },
     {
-      id: 'golden-triangle',
+      id: 'khajuraho-orchha-heritage-escape',
+      title: 'Khajuraho & Orchha Heritage Escape',
+      description: 'Explore India\'s artistic and architectural gems, preserved over a millennium.',
+      location: 'Madhya Pradesh, India',
+      duration: '4 Days',
+      price: 10999,
+      image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?w=400&h=300&fit=crop',
+      rating: 4.5,
+      reviews: 98,
+      features: ['UNESCO Sites', 'Temples', 'Architecture', 'History'],
+      category: 'Heritage & Culture'
+    },
+    {
+      id: 'hampi-badami-temple-trail',
+      title: 'Hampi & Badami Temple Trail',
+      description: 'A surreal landscape of boulders and ancient temple architecture that tells the story of the Vijayanagara empire.',
+      location: 'Karnataka, India',
+      duration: '5 Days',
+      price: 12499,
+      image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?w=400&h=300&fit=crop',
+      rating: 4.6,
+      reviews: 134,
+      features: ['Ancient Ruins', 'Cave Temples', 'History', 'Architecture'],
+      category: 'Heritage & Culture'
+    },
+    {
+      id: 'golden-triangle-classic',
       title: 'Golden Triangle Classic',
       description: 'India\'s most iconic and popular cultural circuit, ideal for first-time travelers to India.',
       location: 'Delhi-Agra-Jaipur, India',
@@ -162,7 +214,7 @@ export class TripsComponent implements OnInit {
 
     // Family Holidays
     {
-      id: 'corbett-nainital',
+      id: 'jim-corbett-nainital-wildlife-retreat',
       title: 'Jim Corbett & Nainital Wildlife Retreat',
       description: 'Perfect blend of wildlife, serene hill station, boating fun, and nature walks—ideal for kids and parents alike.',
       location: 'Uttarakhand, India',
@@ -175,7 +227,7 @@ export class TripsComponent implements OnInit {
       category: 'Family Holidays'
     },
     {
-      id: 'mysore-ooty',
+      id: 'mysore-ooty-family-scenic-tour',
       title: 'Mysore - Ooty Family Scenic Tour',
       description: 'A mix of royal grandeur and scenic hill beauty with fun activities for every age group.',
       location: 'Karnataka, India',
@@ -185,6 +237,45 @@ export class TripsComponent implements OnInit {
       rating: 4.5,
       reviews: 134,
       features: ['Palace', 'Toy Train', 'Botanical Gardens', 'Hill Station'],
+      category: 'Family Holidays'
+    },
+    {
+      id: 'sikkim-gangtok-family-escape',
+      title: 'Sikkim - Gangtok Family Escape',
+      description: 'A peaceful yet adventurous destination with snow lakes, yak rides, and Buddhist monasteries to delight both kids and adults.',
+      location: 'Sikkim, India',
+      duration: '5 Days',
+      price: 16999,
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop',
+      rating: 4.7,
+      reviews: 156,
+      features: ['Cable Car', 'Tsomgo Lake', 'Monasteries', 'Mountain Views'],
+      category: 'Family Holidays'
+    },
+    {
+      id: 'andaman-family-beach-holiday',
+      title: 'Andaman Family Beach Holiday',
+      description: 'Shallow beaches and island hopping experiences that are safe and fun-filled for families with kids.',
+      location: 'Andaman Islands, India',
+      duration: '5 Days',
+      price: 20499,
+      image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop',
+      rating: 4.8,
+      reviews: 189,
+      features: ['Family Beaches', 'Water Sports', 'Island Hopping', 'Safe Activities'],
+      category: 'Family Holidays'
+    },
+    {
+      id: 'ramoji-film-city-hyderabad-adventure',
+      title: 'Ramoji Film City - Hyderabad Adventure',
+      description: 'A creative and cinematic journey where fantasy comes alive—ideal for fun-loving families.',
+      location: 'Hyderabad, India',
+      duration: '3 Days',
+      price: 9499,
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop',
+      rating: 4.4,
+      reviews: 123,
+      features: ['Film City', 'Entertainment', 'Snow World', 'Planetarium'],
       category: 'Family Holidays'
     },
 
@@ -204,7 +295,7 @@ export class TripsComponent implements OnInit {
       groupDiscount: 20
     },
     {
-      id: 'thailand-escape',
+      id: 'thailand-fun-escape',
       title: 'Thailand Fun Escape',
       description: 'Exotic beaches, Thai street food, temples, and fun nightlife with affordable luxury.',
       location: 'Bangkok-Pattaya, Thailand',
@@ -217,7 +308,7 @@ export class TripsComponent implements OnInit {
       category: 'International Tours'
     },
     {
-      id: 'maldives-paradise',
+      id: 'mesmerizing-maldives',
       title: 'Mesmerizing Maldives',
       description: 'Ultimate romantic and luxurious getaway with crystal-clear waters and white sandy beaches.',
       location: 'Maldives',
@@ -229,10 +320,36 @@ export class TripsComponent implements OnInit {
       features: ['Luxury Villa', 'Water Sports', 'Candlelight Dinner', 'Spa'],
       category: 'International Tours'
     },
+    {
+      id: 'singapore-family-adventure',
+      title: 'Singapore - Family Adventure',
+      description: 'A futuristic city-state packed with attractions, eco-wonders, and culinary diversity.',
+      location: 'Singapore',
+      duration: '5 Days',
+      price: 62499,
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop',
+      rating: 4.8,
+      reviews: 234,
+      features: ['Universal Studios', 'Gardens by Bay', 'Sentosa', 'Night Safari'],
+      category: 'International Tours'
+    },
+    {
+      id: 'europe-highlights',
+      title: 'Europe Highlights',
+      description: 'A dream tour of romantic Paris, vibrant Amsterdam, and the scenic Swiss Alps all in one unforgettable experience.',
+      location: 'Paris-Amsterdam-Switzerland',
+      duration: '10 Days',
+      price: 189999,
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop',
+      rating: 4.9,
+      reviews: 89,
+      features: ['Eiffel Tower', 'Canal Tours', 'Swiss Alps', 'Cultural Sites'],
+      category: 'International Tours'
+    },
 
     // Weekend Road Trips
     {
-      id: 'jaipur-weekend',
+      id: 'jaipur-weekend-getaway',
       title: 'Jaipur Weekend Getaway',
       description: 'Just a few hours from Delhi, Jaipur offers royal vibes, street food, and handicrafts for a quick royal escape.',
       location: 'Jaipur, India',
@@ -245,7 +362,7 @@ export class TripsComponent implements OnInit {
       category: 'Weekend Road Trips'
     },
     {
-      id: 'rishikesh-adventure',
+      id: 'rishikesh-adventure-trip',
       title: 'Rishikesh Adventure Trip',
       description: 'Ideal for adventure lovers looking for a quick weekend thrill.',
       location: 'Rishikesh, India',
@@ -255,6 +372,32 @@ export class TripsComponent implements OnInit {
       rating: 4.5,
       reviews: 123,
       features: ['River Rafting', 'Ganga Aarti', 'Cliff Jumping', 'Camping'],
+      category: 'Weekend Road Trips'
+    },
+    {
+      id: 'agra-fatehpur-sikri-quick-tour',
+      title: 'Agra & Fatehpur Sikri Quick Tour',
+      description: 'Witness the timeless beauty of the Taj Mahal and Mughal architectural gems.',
+      location: 'Agra, India',
+      duration: '2 Days',
+      price: 4999,
+      image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?w=400&h=300&fit=crop',
+      rating: 4.6,
+      reviews: 167,
+      features: ['Taj Mahal', 'Agra Fort', 'Fatehpur Sikri', 'Mughal Heritage'],
+      category: 'Weekend Road Trips'
+    },
+    {
+      id: 'mahabaleshwar-nature-drive',
+      title: 'Mahabaleshwar Nature Drive',
+      description: 'A refreshing hill station getaway with strawberry farms, scenic viewpoints, and pleasant weather.',
+      location: 'Mahabaleshwar, Maharashtra',
+      duration: '2 Days',
+      price: 6499,
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop',
+      rating: 4.3,
+      reviews: 98,
+      features: ['Hill Station', 'Strawberry Farms', 'Viewpoints', 'Nature'],
       category: 'Weekend Road Trips'
     }
   ];

@@ -3,8 +3,13 @@
 </app-alert-popup>
 
 <!-- Hero Section -->
-<section class="relative bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
-  <div class="absolute inset-0 bg-black opacity-20"></div>
+<section class="relative bg-gradient-to-r from-primary-600 to-secondary-600 text-white py-40">
+  <!-- Video Background -->
+  <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover">
+    <source src="https://black-tomato.s3.eu-west-2.amazonaws.com/2025%2F02%2Fblack-tomato-homepage.mp4"
+      type="video/mp4">
+  </video>
+  <div class="absolute inset-0 bg-black opacity-40"></div>
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
     <div class="text-center animate-fade-in">
       <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
@@ -126,45 +131,55 @@
         <h3 class="font-semibold text-gray-800 mb-2">Cruise</h3>
         <p class="text-sm text-gray-600">Luxury Voyages</p>
       </div>
+
+      <!-- Visa -->
+      <div class="text-center group cursor-pointer p-6 rounded-lg hover:shadow-lg transition-all duration-300">
+        <div
+          class="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-cyan-200 transition-colors">
+          <i class="fas fa-passport text-2xl text-cyan-600"></i>
+        </div>
+        <h3 class="font-semibold text-gray-800 mb-2">Visa</h3>
+        <p class="text-sm text-gray-600">Easy Processing</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- Quick Search Section -->
-<section class="py-16 bg-gray-50">
+<!-- <section class="py-16 bg-gray-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="bg-white rounded-lg shadow-lg p-8">
       <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Find Your Perfect Trip</h3>
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">Destination</label>
-          <input type="text" placeholder="Where to?"
+          <input type="text" placeholder="Where to?" [(ngModel)]="searchCriteria.destination"
             class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">Duration</label>
-          <select
+          <select [(ngModel)]="searchCriteria.duration"
             class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-            <option>Any Duration</option>
-            <option>1-3 Days</option>
-            <option>4-7 Days</option>
-            <option>1-2 Weeks</option>
-            <option>2+ Weeks</option>
+            <option value="">Any Duration</option>
+            <option value="1-3">1-3 Days</option>
+            <option value="4-7">4-7 Days</option>
+            <option value="1-2-weeks">1-2 Weeks</option>
+            <option value="2-weeks-plus">2+ Weeks</option>
           </select>
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">Budget</label>
-          <select
+          <select [(ngModel)]="searchCriteria.budget"
             class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-            <option>Any Budget</option>
-            <option>Under ₹10,000</option>
-            <option>₹10,000 - ₹25,000</option>
-            <option>₹25,000 - ₹50,000</option>
-            <option>₹50,000+</option>
+            <option value="">Any Budget</option>
+            <option value="under-10000">Under ₹10,000</option>
+            <option value="10000-25000">₹10,000 - ₹25,000</option>
+            <option value="25000-50000">₹25,000 - ₹50,000</option>
+            <option value="50000-plus">₹50,000+</option>
           </select>
         </div>
         <div class="flex items-end">
-          <button class="w-full btn-primary py-3">
+          <button (click)="searchTrips()" class="w-full btn-primary py-3">
             <i class="fas fa-search mr-2"></i>
             Search Trips
           </button>
@@ -172,46 +187,52 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
-<!-- Why Travel With Us Section -->
-<section class="py-20 bg-white">
+<!-- Start Your Journey Section -->
+<section class="py-20 bg-gray-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Why Choose GlobalEaseTrip?</h2>
-      <p class="text-xl text-gray-600 max-w-2xl mx-auto">We're committed to making your travel dreams come true with
-        exceptional service and unforgettable experiences.</p>
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-900 mb-8 tracking-wide">START YOUR JOURNEY</h2>
+
+      <!-- Navigation Tabs -->
+      <div class="flex justify-center space-x-8 mb-12">
+        <button *ngFor="let tab of journeyTabs" (click)="selectedJourneyTab = tab.id"
+          [class]="selectedJourneyTab === tab.id ? 'text-black border-b-2 border-black font-semibold' : 'text-gray-500 hover:text-gray-700'"
+          class="pb-2 text-sm uppercase tracking-wider transition-colors duration-200">
+          {{tab.label}}
+        </button>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="text-center group">
-        <div
-          class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary-200 transition-colors">
-          <i class="fas fa-user-tie text-3xl text-primary-600"></i>
-        </div>
-        <h3 class="text-xl font-semibold text-gray-800 mb-4">Expert Guides</h3>
-        <p class="text-gray-600">Our experienced local guides provide insider knowledge and ensure you experience the
-          authentic culture of each destination.</p>
-      </div>
+    <!-- Journey Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+      <div *ngFor="let category of getJourneyCategoriesForTab()"
+        class="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+        (click)="exploreCategory(category.type)">
 
-      <div class="text-center group">
-        <div
-          class="w-20 h-20 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary-200 transition-colors">
-          <i class="fas fa-cog text-3xl text-secondary-600"></i>
-        </div>
-        <h3 class="text-xl font-semibold text-gray-800 mb-4">Custom Packages</h3>
-        <p class="text-gray-600">Tailored itineraries designed to match your interests, budget, and travel style for a
-          truly personalized experience.</p>
-      </div>
+        <!-- Background Image -->
+        <div class="aspect-[4/5] relative">
+          <img [src]="category.image" [alt]="category.title"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
 
-      <div class="text-center group">
-        <div
-          class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-200 transition-colors">
-          <i class="fas fa-headset text-3xl text-green-600"></i>
+          <!-- Overlay -->
+          <div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-50 transition-all duration-300">
+          </div>
+
+          <!-- Content -->
+          <div class="absolute inset-0 flex flex-col justify-end p-6 text-white">
+            <h3 class="text-xl font-bold mb-2 uppercase tracking-wider">{{category.title}}</h3>
+            <p class="text-sm opacity-90 mb-4">{{category.description}}</p>
+
+            <!-- Explore Button -->
+            <button
+              class="bg-white text-black px-4 py-2 rounded-md text-sm font-semibold hover:bg-gray-100 transition-colors duration-200 self-start">
+              Explore {{category.title}}
+            </button>
+          </div>
         </div>
-        <h3 class="text-xl font-semibold text-gray-800 mb-4">24/7 Support</h3>
-        <p class="text-gray-600">Round-the-clock assistance throughout your journey, ensuring peace of mind and
-          immediate help when you need it.</p>
       </div>
     </div>
   </div>

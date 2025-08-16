@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { TripCardComponent, Trip } from '../../components/trip-card/trip-card';
 import { AlertPopupComponent } from '../../components/alert-popup/alert-popup';
 
@@ -11,15 +12,166 @@ interface Testimonial {
   avatar: string;
 }
 
+interface SearchCriteria {
+  destination: string;
+  duration: string;
+  budget: string;
+}
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, TripCardComponent, AlertPopupComponent],
+  imports: [CommonModule, RouterModule, TripCardComponent, AlertPopupComponent, FormsModule],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
 export class HomeComponent implements OnInit {
   showAlert = false;
+  selectedJourneyTab = 'traveller';
+  
+  searchCriteria: SearchCriteria = {
+    destination: '',
+    duration: '',
+    budget: ''
+  };
+
+  journeyTabs = [
+    { id: 'traveller', label: 'BY TRAVELLER' },
+    { id: 'popular', label: 'MOST POPULAR' },
+    { id: 'month', label: 'BY MONTH' },
+    { id: 'spotlight', label: 'IN THE SPOTLIGHT' }
+  ];
+
+  journeyCategories = {
+    traveller: [
+      {
+        title: 'FAMILY',
+        description: 'Perfect for creating memories together',
+        image: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400&h=500&fit=crop',
+        type: 'family'
+      },
+      {
+        title: 'COUPLES',
+        description: 'Romantic escapes for two',
+        image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=500&fit=crop',
+        type: 'couples'
+      },
+      {
+        title: 'GROUPS',
+        description: 'Adventures with friends',
+        image: 'https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=400&h=500&fit=crop',
+        type: 'groups'
+      },
+      {
+        title: 'HONEYMOON',
+        description: 'Celebrate your new beginning',
+        image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=500&fit=crop',
+        type: 'honeymoon'
+      },
+      {
+        title: 'SOLO',
+        description: 'Discover yourself through travel',
+        image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=500&fit=crop',
+        type: 'solo'
+      }
+    ],
+    popular: [
+      {
+        title: 'BEACH',
+        description: 'Sun, sand and relaxation',
+        image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=500&fit=crop',
+        type: 'beach'
+      },
+      {
+        title: 'MOUNTAINS',
+        description: 'Peaks and valleys await',
+        image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=500&fit=crop',
+        type: 'mountains'
+      },
+      {
+        title: 'CULTURE',
+        description: 'Rich heritage experiences',
+        image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?w=400&h=500&fit=crop',
+        type: 'culture'
+      },
+      {
+        title: 'ADVENTURE',
+        description: 'Thrilling experiences',
+        image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&h=500&fit=crop',
+        type: 'adventure'
+      },
+      {
+        title: 'LUXURY',
+        description: 'Premium travel experiences',
+        image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&h=500&fit=crop',
+        type: 'luxury'
+      }
+    ],
+    month: [
+      {
+        title: 'JANUARY',
+        description: 'New year, new adventures',
+        image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=500&fit=crop',
+        type: 'january'
+      },
+      {
+        title: 'APRIL',
+        description: 'Spring destinations',
+        image: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&h=500&fit=crop',
+        type: 'april'
+      },
+      {
+        title: 'JULY',
+        description: 'Summer escapes',
+        image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=500&fit=crop',
+        type: 'july'
+      },
+      {
+        title: 'OCTOBER',
+        description: 'Autumn adventures',
+        image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&h=500&fit=crop',
+        type: 'october'
+      },
+      {
+        title: 'DECEMBER',
+        description: 'Holiday celebrations',
+        image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=400&h=500&fit=crop',
+        type: 'december'
+      }
+    ],
+    spotlight: [
+      {
+        title: 'TRENDING',
+        description: 'What\'s hot right now',
+        image: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=400&h=500&fit=crop',
+        type: 'trending'
+      },
+      {
+        title: 'NEW',
+        description: 'Latest destinations',
+        image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=500&fit=crop',
+        type: 'new'
+      },
+      {
+        title: 'EXCLUSIVE',
+        description: 'Limited time offers',
+        image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=500&fit=crop',
+        type: 'exclusive'
+      },
+      {
+        title: 'FEATURED',
+        description: 'Editor\'s choice',
+        image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?w=400&h=500&fit=crop',
+        type: 'featured'
+      },
+      {
+        title: 'SPECIAL',
+        description: 'Unique experiences',
+        image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=500&fit=crop',
+        type: 'special'
+      }
+    ]
+  };
   
   featuredTrips: Trip[] = [
     {
@@ -83,11 +235,30 @@ export class HomeComponent implements OnInit {
     }
   ];
 
+  constructor(private router: Router) {}
+
   ngOnInit() {
     // Show alert popup after 3 seconds
     setTimeout(() => {
       this.showAlert = true;
     }, 3000);
+  }
+
+  searchTrips() {
+    // Navigate to trips page with search parameters
+    const queryParams: any = {};
+    
+    if (this.searchCriteria.destination) {
+      queryParams.destination = this.searchCriteria.destination;
+    }
+    if (this.searchCriteria.duration) {
+      queryParams.duration = this.searchCriteria.duration;
+    }
+    if (this.searchCriteria.budget) {
+      queryParams.budget = this.searchCriteria.budget;
+    }
+    
+    this.router.navigate(['/trips'], { queryParams });
   }
 
   closeAlert() {
@@ -104,6 +275,15 @@ export class HomeComponent implements OnInit {
     // Handle trip booking logic
     console.log('Booking trip:', trip);
     // Could open booking modal or redirect to booking page
+  }
+
+  getJourneyCategoriesForTab() {
+    return this.journeyCategories[this.selectedJourneyTab as keyof typeof this.journeyCategories] || [];
+  }
+
+  exploreCategory(categoryType: string) {
+    // Navigate to trips page with category filter
+    this.router.navigate(['/trips'], { queryParams: { category: categoryType } });
   }
 }
 
