@@ -1,6 +1,6 @@
-<nav class="bg-white shadow-lg sticky top-0 z-50">
+<nav class="shadow-lg sticky top-0 z-50 bg-[#303841]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between h-16">
+    <div class="flex justify-between h-20">
       <!-- Logo -->
       <!-- <div class="flex items-center">
         <a routerLink="/" class="flex items-center space-x-2">
@@ -12,7 +12,6 @@
       </div> -->
       <div class="flex items-center">
         <a routerLink="/" class="flex items-center space-x-2">
-          <!-- Logo Image -->
           <div class="w-8 h-8 rounded-lg overflow-hidden">
             <img
               src="assets/images/logo.png"
@@ -20,10 +19,8 @@
               class="w-full h-full object-cover"
             />
           </div>
-
-          <!-- Brand Name -->
-          <span class="text-2xl font-bold text-primary-600"
-            >GlobalEaseTrip</span
+          <span class="text-2xl font-bold text-white"
+            >globaleasetrip</span
           >
         </a>
       </div>
@@ -31,42 +28,42 @@
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-8">
         <a
-          routerLink="/"
-          routerLinkActive="text-primary-600"
+          routerLink="/" (click)="scrollToTop()" 
+          routerLinkActive="text-white"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+          class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
         >
           Home
         </a>
         <a
-          routerLink="/trips"
-          routerLinkActive="text-primary-600"
-          class="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+          routerLink="/trips" (click)="scrollToTop()" 
+          routerLinkActive="text-white"
+          class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
         >
           Trips
         </a>
         <a
-          routerLink="/about"
-          routerLinkActive="text-primary-600"
-          class="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+          routerLink="/about" (click)="scrollToTop()" 
+          routerLinkActive="text-white"
+          class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
         >
           About
         </a>
         <a
-          routerLink="/blog"
-          routerLinkActive="text-primary-600"
-          class="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+          routerLink="/blog" (click)="scrollToTop()"
+          routerLinkActive="text-white"
+          class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
         >
           Blog
         </a>
         <a
-          routerLink="/contact"
-          routerLinkActive="text-primary-600"
-          class="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+          routerLink="/contact" (click)="scrollToTop()"
+          routerLinkActive="text-white"
+          class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
         >
           Contact
         </a>
-        <button class="btn-primary">Book Now</button>
+        <button class="btn-primary" (click)="openWhatsApp()">Book Now</button>
       </div>
 
       <!-- Mobile menu button -->
@@ -119,8 +116,9 @@
         >
           Contact
         </a>
-        <button class="btn-primary w-full mt-2">Book Now</button>
-      </div>
+      </div>       
+       <button class="btn-primary w-full mt-2" (click)="openWhatsApp()" >Book Now</button>
+
     </div>
   </div>
 </nav>

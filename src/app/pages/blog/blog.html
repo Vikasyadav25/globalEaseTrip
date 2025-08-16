@@ -1,9 +1,8 @@
 <!-- Hero Section -->
-<!-- <section class="bg-gradient-to-r from-primary-600 to-secondary-600 text-white py-20"> -->
-  <section class="relative bg-cover bg-center bg-no-repeat text-white py-20 min-h-[400px]"
+<section class="relative bg-cover bg-center bg-no-repeat text-white py-20 min-h-[500px] flex items-center justify-center"
     style="background-image: url('assets/images/travel_blog.png');"> 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center">
+    <div class="text-center animate-fade-in">
       <h1 class="text-4xl md:text-5xl font-bold mb-6">Travel Blog</h1>
       <p class="text-xl opacity-90 max-w-3xl mx-auto">
         Discover travel tips, destination guides, and inspiring stories from fellow adventurers around the world.
@@ -20,23 +19,31 @@
       <div class="bg-white rounded-lg shadow-lg overflow-hidden">
         <div class="md:flex">
           <div class="md:w-1/2">
-            <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&h=400&fit=crop" alt="Featured article" class="w-full h-64 md:h-full object-cover">
+            <!-- https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&h=400&fit=crop -->
+
+            <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*2lr6QUzVzoml69-HeX0J4w.png"
+              alt="Featured article" class="w-full h-64 md:h-full object-cover">
           </div>
           <div class="md:w-1/2 p-8">
             <div class="flex items-center text-sm text-gray-500 mb-4">
               <span>Travel Tips</span>
               <span class="mx-2">•</span>
-              <span>March 15, 2024</span>
+              <span>Augest 02, 202</span>
             </div>
-            <h3 class="text-2xl font-bold text-gray-800 mb-4">10 Essential Travel Tips for First-Time International Travelers</h3>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">10 Essential Travel Tips for First-Time International
+              Travelers</h3>
             <p class="text-gray-600 mb-6">
-              Planning your first international trip can be overwhelming. From passport requirements to packing essentials, 
-              we've compiled the most important tips to ensure your journey is smooth and memorable.
+              Traveling internationally for the first time? It’s exciting, but also a bit overwhelming. From packing mistakes to
+              passport mishaps, there’s a lot that can go wrong — but also so much to explore! Here are 10 smart, practical tips that
+              will help make your journey smooth, memorable, and stress-free.
             </p>
-            <button class="btn-primary">
-              Read Full Article
-              <i class="fas fa-arrow-right ml-2"></i>
-            </button>
+            <a href="https://medium.com/@globaleasetrip/%EF%B8%8F-10-essential-international-travel-tips-for-first-time-travelers-63518d8c05d7"
+              target="_blank" rel="noopener noreferrer">
+              <button class="btn-primary">
+                Read Full Article
+                <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+            </a>
           </div>
         </div>
       </div>
@@ -45,22 +52,17 @@
 </section>
 
 <!-- Blog Categories -->
-<section class="py-12 bg-gray-50">
+<section class="py-12 bg-gray-50" id="targetSection" >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-8">
       <h2 class="text-2xl font-bold text-gray-800 mb-4">Browse by Category</h2>
     </div>
-    
+
     <div class="flex flex-wrap justify-center gap-4">
-      <button 
-        *ngFor="let category of categories" 
-        (click)="selectCategory(category)"
-        [class.bg-primary-600]="selectedCategory === category"
-        [class.text-white]="selectedCategory === category"
-        [class.bg-white]="selectedCategory !== category"
-        [class.text-gray-700]="selectedCategory !== category"
-        class="px-6 py-3 rounded-lg border border-gray-300 hover:bg-primary-600 hover:text-white transition-colors"
-      >
+      <button *ngFor="let category of categories" (click)="selectCategory(category)"
+        [class.bg-primary-600]="selectedCategory === category" [class.text-white]="selectedCategory === category"
+        [class.bg-white]="selectedCategory !== category" [class.text-gray-700]="selectedCategory !== category"
+        class="px-6 py-3 rounded-lg border border-gray-300 hover:bg-primary-600 hover:text-white transition-colors">
         {{category}}
       </button>
     </div>
@@ -71,7 +73,8 @@
 <section class="py-20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <article *ngFor="let article of filteredArticles" class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+      <article *ngFor="let article of filteredArticles"
+        class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
         <img [src]="article.image" [alt]="article.title" class="w-full h-48 object-cover">
         <div class="p-6">
           <div class="flex items-center text-sm text-gray-500 mb-3">
@@ -86,20 +89,20 @@
               <img [src]="article.author.avatar" [alt]="article.author.name" class="w-8 h-8 rounded-full mr-3">
               <span class="text-sm text-gray-700">{{article.author.name}}</span>
             </div>
-            <button class="text-primary-600 hover:text-primary-700 font-medium text-sm">
+            <a [href]="article.sourceUrl" target="_blank"
+              class="text-primary-600 hover:text-primary-700 font-medium text-sm">
               Read More
               <i class="fas fa-arrow-right ml-1"></i>
-            </button>
+            </a>
           </div>
         </div>
       </article>
     </div>
-
-    <!-- Load More Button -->
-    <div class="text-center mt-12">
-      <button class="btn-secondary px-8 py-3">
-        Load More Articles
-        <i class="fas fa-chevron-down ml-2"></i>
+    <div class="text-center mt-12" *ngIf="getFilteredList().length > visibleCount">
+      <button (click)="toggleShowAll()" class="btn-secondary px-8 py-3">
+        {{ showAll ? 'Hide Articles' : 'Load More Articles' }}
+        <i *ngIf="showAll" class="fas fa-chevron-up ml-2"></i>
+        <i *ngIf="!showAll" class="fas fa-chevron-down ml-2"></i>
       </button>
     </div>
   </div>
@@ -110,21 +113,20 @@
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <h2 class="text-3xl font-bold mb-4">Never Miss a Travel Story</h2>
     <p class="text-xl mb-8 opacity-90">
-      Subscribe to our newsletter and get the latest travel tips, destination guides, and exclusive offers delivered to your inbox.
+      Subscribe to our newsletter and get the latest travel tips, destination guides, and exclusive offers delivered to
+      your inbox.
     </p>
-    
+
     <div class="flex flex-col sm:flex-row max-w-md mx-auto">
-      <input 
-        type="email" 
-        placeholder="Enter your email address" 
-        class="flex-1 px-6 py-4 rounded-l-lg sm:rounded-r-none rounded-r-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white"
-      >
-      <button class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-r-lg sm:rounded-l-none rounded-l-lg font-semibold transition-colors">
+      <input type="email" placeholder="Enter your email address"
+        class="flex-1 px-6 py-4 rounded-l-lg sm:rounded-r-none rounded-r-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white">
+      <button
+        class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-r-lg sm:rounded-l-none rounded-l-lg font-semibold transition-colors">
         Subscribe
       </button>
     </div>
-    
-    <p class="text-sm mt-4 opacity-75">Join 10,000+ travelers who trust our recommendations.</p>
+
+    <p class="text-sm mt-4 opacity-75">Join 500+ travelers who trust our recommendations.</p>
   </div>
 </section>
 

@@ -15,5 +15,15 @@ export class NavbarComponent {
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
+  scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  openWhatsApp() {
+  console.log('WhatsApp button clicked');
+  const phone = '918938962400';
+  const message = 'I want to book';
+  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+}
 }
 
