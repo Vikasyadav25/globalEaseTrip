@@ -1,5 +1,3 @@
-<!-- Hero Section -->
-<!-- <section class="bg-blue-600 from-primary-600 to-secondary-600 text-white py-20"> -->
 <section class="relative bg-cover bg-center bg-no-repeat text-white py-20 min-h-[500px] flex items-center justify-center" 
   style="background-image: url('assets/images/hero_adventure.png');">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,71 +15,8 @@
 <section class="py-20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-      <!-- Contact Info -->
-      <!-- <div>
-        <h2 class="text-3xl font-bold text-gray-800 mb-8">Contact Information</h2>
-        
-        <div class="space-y-6">
-          <div class="flex items-start space-x-4">
-            <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
-              <i class="fas fa-map-marker-alt text-primary-600"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-semibold text-gray-800 mb-1">Office Address</h3>
-              <p class="text-gray-600">9/37 Rayjadgan Kandhla, Shamli Uttar Pradesh 247775</p>
-            </div>
-          </div>
-          
-          <div class="flex items-start space-x-4">
-            <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
-              <i class="fas fa-phone text-primary-600"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-semibold text-gray-800 mb-1">Phone Number</h3>
-              <p class="text-gray-600">+91-6280405515</p>
-              <p class="text-gray-500 text-sm">Mon-Fri: 9AM-10PM EST</p>
-            </div>
-          </div>
-          
-          <div class="flex items-start space-x-4">
-            <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
-              <i class="fas fa-envelope text-primary-600"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-semibold text-gray-800 mb-1">Email Address</h3>
-              <p class="text-gray-600">globaleasetrip&#64;gmail.com</p>
-              <p class="text-gray-500 text-sm">We'll respond within 24 hours</p>
-            </div>
-          </div>
-          
-          <div class="flex items-start space-x-4">
-            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-              <i class="fab fa-whatsapp text-green-600"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-semibold text-gray-800 mb-1">WhatsApp</h3>
-              <p class="text-gray-600">+91-6280405515</p>
-              <p class="text-gray-500 text-sm">Available 24/7 for urgent inquiries</p>
-            </div>
-          </div>
-        </div>
-        <div class="mt-8">
-          <h3 class="text-lg font-semibold text-gray-800 mb-4">Follow Us</h3>
-          <div class="flex space-x-4">
-            <a href="https://www.facebook.com/share/1BVHv12KJ7/" target="_blank"   class="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/globaleasetrip/" target="_blank"  class="w-10 h-10 bg-pink-600 text-white rounded-lg flex items-center justify-center hover:bg-pink-700 transition-colors">
-              <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.youtube.com/@globaleasetrip" target="_blank"  class="w-10 h-10 bg-red-600 text-white rounded-lg flex items-center justify-center hover:bg-red-700 transition-colors">
-              <i class="fab fa-youtube"></i>
-            </a>
-          </div>
-        </div>
-      </div> -->
-
-      <!-- Contact Form -->
+   
+     <!-- Contact Form -->
       <div class="border border-gray-200 rounded-lg p-6 shadow-lg">
         <h2 class="text-3xl font-bold text-gray-800 mb-8">Send Us a Message</h2>
         <form class="space-y-6" [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -142,10 +77,15 @@
             </label>
           </div>
 
-          <button type="submit" class="w-full btn-primary py-3 text-lg">
+          <!-- <button type="submit" class="w-full btn-primary py-3 text-lg">
             <i class="fas fa-paper-plane mr-2"></i>
             Send Message
+          </button> -->
+          <button type="submit" class="w-full btn-primary py-3 text-lg" [disabled]="loading">
+            <i class="fas fa-paper-plane mr-2"></i>
+            {{ loading ? 'Sending...' : 'Send Message' }}
           </button>
+          <p *ngIf="status" class="mt-4 text-center text-sm">{{ status }}</p>
         </form>
       </div>
 
@@ -229,7 +169,5 @@
         </div>
       </div>
     </div>
-
-
   </div>
 </section>

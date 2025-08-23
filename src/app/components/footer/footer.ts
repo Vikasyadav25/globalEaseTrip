@@ -15,7 +15,7 @@ export class FooterComponent {
   loading = false;
   status = '';
 
-  private WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwyNBnMN05KDutuvyOJwf1QIqzDyVeOultioGAb9GzuOHBru9lAQ6CezHzkdka4k4QN/exec';
+  private WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbygiReWPzjsbORsx5ewJ-9MPau-U_5bmAaAoa5Z_kaGXg7ytQ_1CsKECPAUISQs9r5-/exec';
 
 
   async subscribe() {

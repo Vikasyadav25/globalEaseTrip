@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 
 @Component({
@@ -13,6 +13,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class ContactComponent {
   form: FormGroup;
+  status: string = '';
+  loading = false;
   
   openedIndex: number | null = null;
 
@@ -34,15 +36,16 @@ export class ContactComponent {
       answer: 'Groups of 4 or more travelers receive discounts on accommodations, activities, and transportation. The exact discount varies by destination and season.'
     }
   ];
+  private WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw8zVw8fraR7x6pSh1y70jOVHEBpJIsHytlQaQ1hXA39zw2eWWTvyc-ZhoMqxTgvd3Kjw/exec';
   
   constructor(private http: HttpClient, private fb: FormBuilder) {
     this.form = this.fb.group({
-      firstName: [''],
-      lastName: [''],
-      email: [''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       phone: [''],
-      subject: [''],
-      message: [''],
+      subject: ['', Validators.required],
+      message: ['', Validators.required],
       newsletter: [false],
     });
   }
@@ -51,43 +54,39 @@ export class ContactComponent {
     this.openedIndex = this.openedIndex === index ? null : index;
   }
   
-  onSubmit() {
-    if (this.form.invalid) {
-      alert('Please fill in all required fields.');
-      return;
-    }
+  async onSubmit() {
+    if (this.form.invalid) return;
+    this.loading = true;
 
-    const endpoint =
-      'https://script.google.com/macros/s/AKfycbzyQTZNFHxL42nW6pwREY-w955IX5gJVXhF17-LJxNyxQH4fXxheLQEh6VYwEMMxFgAIg/exec';
-    
-    this.http
-      .post(endpoint, this.form.value, {
-        headers: { 'Content-Type': 'application/json' },
-      })
-      .subscribe({
-        next: (res: any) => {
-          if (res?.result === 'success') {
-            alert('Form submitted successfully!');
-            this.form.reset();
-          } else {
-            alert(
-              'Server responded with error: ' +
-                (res?.message || 'Unknown error')
-            );
-          }
-        },
-        error: (err) => {
-          console.error('Submission error:', err);
-          alert('Something went wrong while submitting the form.');
-        },
+    const body = new URLSearchParams(this.form.value as any);
+
+    console.log("🚀 Sending form-urlencoded:", body.toString());
+
+    try {
+      await fetch(this.WEB_APP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body
       });
 
-
+      this.status = '🎉 Message sent successfully!';
+      this.form.reset();
+    } catch (err) {
+      console.error("❌ Error sending:", err);
+      this.status = '❌ Failed to send.';
+    } finally {
+      this.loading = false;
+    }
   }
+
+
+
 
   openGoogleForm() {
     const googleFormUrl = 'https://forms.gle/UuDjMh1qPQqicU4o6';
     window.open(googleFormUrl, '_blank');
   }
+
 }
 
