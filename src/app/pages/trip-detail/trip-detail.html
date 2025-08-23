@@ -3,6 +3,14 @@
   <div class="absolute inset-0">
     <img [src]="trip?.image" [alt]="trip?.title" class="w-full h-full object-cover opacity-60">
   </div>
+  <div class="absolute top-6 left-6 z-50">
+    <button routerLink="/trips"
+      class="flex items-center bg-black/40 hover:bg-black/60 text-white px-4 py-2 rounded-lg transition-colors">
+      <i class="fas fa-arrow-left mr-2"></i>
+      Back to Trips
+    </button>
+  </div>
+  
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
     <div class="max-w-3xl">
       <div class="flex items-center text-sm mb-4">
@@ -35,6 +43,14 @@
           <i class="fas fa-share mr-2"></i>
           Share Trip
         </button>
+        <!-- <button (click)="shareTrip('email')"
+          class="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold py-3 px-8 rounded-lg text-lg transition-colors">
+          <i class="fas fa-share mr-2"></i><i class="fas fa-envelope mr-2"></i> Share Trip
+        </button>
+        <button (click)="shareTrip('whatsapp')"
+          class="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold py-3 px-8 rounded-lg text-lg transition-colors">
+          <i class="fab fa-whatsapp mr-2"></i> WhatsApp
+        </button> -->
       </div>
     </div>
   </div>

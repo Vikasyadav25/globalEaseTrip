@@ -39,5 +39,9 @@ export class TripCardComponent {
   onBookTrip() {
     this.bookTrip.emit(this.trip);
   }
+  scrollTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
 }
 

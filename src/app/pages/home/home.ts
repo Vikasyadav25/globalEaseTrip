@@ -10,6 +10,7 @@ interface Testimonial {
   location: string;
   review: string;
   avatar: string;
+  rating: number;
 }
 
 interface SearchCriteria {
@@ -45,31 +46,31 @@ export class HomeComponent implements OnInit {
   journeyCategories = {
     traveller: [
       {
-        title: 'FAMILY',
+        title: 'Faimly',
         description: 'Perfect for creating memories together',
         image: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400&h=500&fit=crop',
         type: 'family'
       },
       {
-        title: 'COUPLES',
+        title: 'Couples',
         description: 'Romantic escapes for two',
         image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=500&fit=crop',
         type: 'couples'
       },
       {
-        title: 'GROUPS',
+        title: 'Groups',
         description: 'Adventures with friends',
         image: 'https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=400&h=500&fit=crop',
         type: 'groups'
       },
       {
-        title: 'HONEYMOON',
+        title: 'Honymoon',
         description: 'Celebrate your new beginning',
         image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=500&fit=crop',
         type: 'honeymoon'
       },
       {
-        title: 'SOLO',
+        title: 'Solo',
         description: 'Discover yourself through travel',
         image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=500&fit=crop',
         type: 'solo'
@@ -77,31 +78,31 @@ export class HomeComponent implements OnInit {
     ],
     popular: [
       {
-        title: 'BEACH',
+        title: 'Beach',
         description: 'Sun, sand and relaxation',
         image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=500&fit=crop',
         type: 'beach'
       },
       {
-        title: 'MOUNTAINS',
+        title: 'Mountains',
         description: 'Peaks and valleys await',
         image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=500&fit=crop',
         type: 'mountains'
       },
       {
-        title: 'CULTURE',
+        title: 'Culture',
         description: 'Rich heritage experiences',
         image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?w=400&h=500&fit=crop',
         type: 'culture'
       },
       {
-        title: 'ADVENTURE',
+        title: 'Adventure',
         description: 'Thrilling experiences',
         image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&h=500&fit=crop',
         type: 'adventure'
       },
       {
-        title: 'LUXURY',
+        title: 'Luxury',
         description: 'Premium travel experiences',
         image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&h=500&fit=crop',
         type: 'luxury'
@@ -109,31 +110,31 @@ export class HomeComponent implements OnInit {
     ],
     month: [
       {
-        title: 'JANUARY',
+        title: 'January',
         description: 'New year, new adventures',
         image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=500&fit=crop',
         type: 'january'
       },
       {
-        title: 'APRIL',
+        title: 'April',
         description: 'Spring destinations',
         image: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&h=500&fit=crop',
         type: 'april'
       },
       {
-        title: 'JULY',
+        title: 'July',
         description: 'Summer escapes',
         image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=500&fit=crop',
         type: 'july'
       },
       {
-        title: 'OCTOBER',
+        title: 'October',
         description: 'Autumn adventures',
         image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&h=500&fit=crop',
         type: 'october'
       },
       {
-        title: 'DECEMBER',
+        title: 'December',
         description: 'Holiday celebrations',
         image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=400&h=500&fit=crop',
         type: 'december'
@@ -141,31 +142,31 @@ export class HomeComponent implements OnInit {
     ],
     spotlight: [
       {
-        title: 'TRENDING',
+        title: 'Trending',
         description: 'What\'s hot right now',
         image: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=400&h=500&fit=crop',
         type: 'trending'
       },
       {
-        title: 'NEW',
+        title: 'New',
         description: 'Latest destinations',
         image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=500&fit=crop',
         type: 'new'
       },
       {
-        title: 'EXCLUSIVE',
+        title: 'Exclusive',
         description: 'Limited time offers',
         image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=500&fit=crop',
         type: 'exclusive'
       },
       {
-        title: 'FEATURED',
+        title: 'Featured',
         description: 'Editor\'s choice',
         image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?w=400&h=500&fit=crop',
         type: 'featured'
       },
       {
-        title: 'SPECIAL',
+        title: 'Special',
         description: 'Unique experiences',
         image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=500&fit=crop',
         type: 'special'
@@ -175,63 +176,95 @@ export class HomeComponent implements OnInit {
   
   featuredTrips: Trip[] = [
     {
-      id: '1',
-      title: 'Magical Bali Adventure',
-      description: 'Explore the beautiful temples, pristine beaches, and lush rice terraces of Bali. Experience the rich culture and warm hospitality of the Balinese people.',
-      location: 'Bali, Indonesia',
-      duration: '7 Days',
-      price: 899,
-      image: 'https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=400&h=300&fit=crop',
-      rating: 4.8,
-      reviews: 124,
-      features: ['Temples', 'Beaches', 'Culture', 'Food'],
-      groupDiscount: 10
-    },
-    {
-      id: '2',
-      title: 'Swiss Alps Hiking Experience',
-      description: 'Breathtaking mountain views, crystal-clear lakes, and charming alpine villages await you in this unforgettable Swiss adventure.',
-      location: 'Swiss Alps, Switzerland',
-      duration: '10 Days',
-      price: 1599,
-      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop',
-      rating: 4.9,
+      id: 'gokarna-beach-trek-camp',
+      title: 'Gokarna Beach Trek & Camp',
+      description: 'A blend of spiritual town and serene beaches. Ideal for backpackers and campers looking for peace.',
+      location: 'Gokarna, Karnataka',
+      duration: '2 Days',
+      price: 6499,
+      image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=400&h=300&fit=crop',
+      rating: 4.3,
       reviews: 89,
-      features: ['Hiking', 'Mountains', 'Nature', 'Adventure']
+      features: ['Beach Camping', 'Trekking', 'Bonfire', 'Spiritual'],
+      category: 'Beach Getaways'
     },
     {
-      id: '3',
-      title: 'Tokyo Cultural Journey',
-      description: 'Immerse yourself in the perfect blend of ancient traditions and modern innovation in Japan\'s vibrant capital city.',
-      location: 'Tokyo, Japan',
+      id: 'mesmerizing-kashmir-tour',
+      title: 'Mesmerizing Kashmir Tour',
+      description: 'Experience the "Heaven on Earth" with snow-covered peaks, colorful gardens, and houseboat luxury.',
+      location: 'Kashmir, India',
       duration: '5 Days',
-      price: 1299,
-      image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400&h=300&fit=crop',
-      rating: 4.7,
-      reviews: 156,
-      features: ['Culture', 'Food', 'Technology', 'History'],
-      groupDiscount: 15
+      price: 14999,
+      image: 'https://images.unsplash.com/photo-1595815771614-ade9d652a65d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      rating: 4.8,
+      reviews: 167,
+      features: ['Dal Lake', 'Shikara Ride', 'Gulmarg', 'Pahalgam'],
+      category: 'Mountain Escapes'
+    },
+     {
+      id: 'varanasi-sarnath-spiritual-journey',
+      title: 'Varanasi - Sarnath Spiritual Journey',
+      description: 'Dive into India\'s spiritual heart, witness ancient rituals and connect with timeless traditions.',
+      location: 'Varanasi, India',
+      duration: '3 Days',
+      price: 8499,
+      image: 'https://images.unsplash.com/photo-1561359313-0639aad49ca6?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      rating: 4.6,
+      reviews: 145,
+      features: ['Ganga Aarti', 'Temples', 'Boat Ride', 'Spiritual Experience'],
+      category: 'Heritage & Culture'
     }
   ];
 
   testimonials: Testimonial[] = [
     {
-      name: 'Sarah Johnson',
-      location: 'New York, USA',
-      review: 'The Bali trip was absolutely incredible! Every detail was perfectly planned, and our guide was amazing. I can\'t wait to book my next adventure with GlobalEaseTrip.',
-      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face'
+      name: 'Shivani Goher',
+      location: 'Himachal, India',
+      review: 'Our Kerala backwaters trip was absolutely incredible! Every detail was perfectly planned, and the houseboat experience was unforgettable. I can’t wait to book my next journey with GlobalEaseTrip.',
+      avatar: 'https://images.unsplash.com/photo-1655395334314-cfef4610b8b2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGdpcmwlMjBpbmRpYXxlbnwwfHwwfHx8MA%3D%3D',
+      rating: 5
     },
     {
-      name: 'Michael Chen',
-      location: 'Toronto, Canada',
-      review: 'The Swiss Alps hiking experience exceeded all my expectations. The scenery was breathtaking, and the accommodations were top-notch. Highly recommended!',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face'
+      name: 'Ajay Minhas',
+      location: 'Mumbai, India',
+      review: 'The Ladakh road trip exceeded all my expectations. The mountain scenery was breathtaking, and the stay at Pangong Lake was top-notch. Highly recommended!',
+      avatar: 'https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW5kaWFuJTIwbWFufGVufDB8fDB8fHww',
+      rating: 4
     },
     {
-      name: 'Emma Rodriguez',
-      location: 'Madrid, Spain',
-      review: 'Tokyo was a dream come true! The cultural experiences were authentic and the food tours were incredible. Thank you for such an amazing journey!',
-      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face'
+      name: 'Pawneet Kaur',
+      location: 'Chandigarh, India',
+      review: 'Exploring Jaipur was a dream come true! The forts, palaces, and cultural experiences were authentic, and the Rajasthani food tours were amazing. Thank you for such a memorable journey!',
+      avatar: 'https://images.unsplash.com/photo-1624610260210-0597342d0e3e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHVuamFiaSUyMGdpcmx8ZW58MHx8MHx8fDA%3D',
+      rating: 5
+    },
+    {
+      name: 'Vani Kapoor',
+      location: 'Bangalore, India',
+      review: 'Our Goa beach holiday was fantastic! From water sports to vibrant nightlife, everything was perfectly organized. GlobalEaseTrip made it a hassle-free and fun-filled vacation.',
+      avatar: 'https://images.unsplash.com/photo-1597983073750-16f5ded1321f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHB1bmphYmklMjBnaXJsfGVufDB8fDB8fHww',
+      rating: 5
+    },
+    {
+      name: 'Nikhil Yadav',
+      location: 'Lucknow, India',
+      review: 'The Varanasi spiritual tour was a life-changing experience. Watching the Ganga Aarti at Dashashwamedh Ghat was truly mesmerizing and unforgettable.',
+      avatar: 'https://plus.unsplash.com/premium_photo-1739384032871-e46f0502de82?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Ym95JTIwaW5kaWF8ZW58MHx8MHx8fDA%3D',
+      rating: 5
+    },
+    {
+      name: 'Sneha Reddy',
+      location: 'Hyderabad, India',
+      review: 'Our trip to Rishikesh was full of adventure! From river rafting to peaceful yoga sessions on the Ganga banks, everything was beyond expectations.',
+      avatar: 'https://images.unsplash.com/photo-1721593444611-21e2c1997312?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGdpcmwlMjBpbmRpYSUyMHB1bmphYml8ZW58MHx8MHx8fDA%3D',
+      rating: 4
+    },
+    {
+      name: 'Arjun Singh',
+      location: 'Amritsar, India',
+      review: 'Visiting Himachal was an amazing experience! The snowy peaks of Manali and the serenity of Dharamshala made it one of my best holidays ever.',
+      avatar: 'https://images.unsplash.com/photo-1729157661483-ed21901ed892?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGluZGlhbiUyMG1hbnxlbnwwfHwwfHx8MA%3D%3D',
+      rating: 5
     }
   ];
 
@@ -284,6 +317,10 @@ export class HomeComponent implements OnInit {
   exploreCategory(categoryType: string) {
     // Navigate to trips page with category filter
     this.router.navigate(['/trips'], { queryParams: { category: categoryType } });
+  }
+
+  scrollTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
 

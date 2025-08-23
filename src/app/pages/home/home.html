@@ -20,13 +20,13 @@
         seamless experiences.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button routerLink="/trips"
+        <button routerLink="/trips" (click)="scrollTop()"
           class="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg text-lg transition-all duration-200 transform hover:scale-105">
           Explore Packages
         </button>
-        <button
+        <button routerLink="/blog"  (click)="scrollTop()"
           class="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-4 px-8 rounded-lg text-lg transition-all duration-200">
-          Watch Video
+          Read Blogs
         </button>
       </div>
     </div>
@@ -68,8 +68,8 @@
           class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200 transition-colors">
           <i class="fas fa-home text-2xl text-purple-600"></i>
         </div>
-        <h3 class="font-semibold text-gray-800 mb-2">Homestays</h3>
-        <p class="text-sm text-gray-600">& Villas</p>
+        <h3 class="font-semibold text-gray-800 mb-2">Homestays & Villas</h3>
+        <p class="text-sm text-gray-600">Luxury Nature Escape</p>
       </div>
 
       <!-- Holiday Packages -->
@@ -78,8 +78,8 @@
           class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-200 transition-colors">
           <i class="fas fa-umbrella-beach text-2xl text-orange-600"></i>
         </div>
-        <h3 class="font-semibold text-gray-800 mb-2">Holiday</h3>
-        <p class="text-sm text-gray-600">Packages</p>
+        <h3 class="font-semibold text-gray-800 mb-2">Holiday Packages</h3>
+        <p class="text-sm text-gray-600">Seamless Holiday Planning</p>
       </div>
 
       <!-- Trains -->
@@ -118,8 +118,8 @@
           class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-pink-200 transition-colors">
           <i class="fas fa-map-marked-alt text-2xl text-pink-600"></i>
         </div>
-        <h3 class="font-semibold text-gray-800 mb-2">Tours</h3>
-        <p class="text-sm text-gray-600">& Attractions</p>
+        <h3 class="font-semibold text-gray-800 mb-2">Tours & Attractions</h3>
+        <p class="text-sm text-gray-600">Adventure Made Easy</p>
       </div>
 
       <!-- Cruise -->
@@ -227,7 +227,7 @@
             <p class="text-sm opacity-90 mb-4">{{category.description}}</p>
 
             <!-- Explore Button -->
-            <button
+            <button (click)="scrollTop()"
               class="bg-white text-black px-4 py-2 rounded-md text-sm font-semibold hover:bg-gray-100 transition-colors duration-200 self-start">
               Explore {{category.title}}
             </button>
@@ -253,7 +253,7 @@
     </div>
 
     <div class="text-center mt-12">
-      <button routerLink="/trips" class="btn-primary text-lg px-8 py-3">
+      <button routerLink="/trips" (click)="scrollTop()" class="btn-primary text-lg px-8 py-3">
         View All Packages
         <i class="fas fa-arrow-right ml-2"></i>
       </button>
@@ -262,33 +262,36 @@
 </section>
 
 <!-- Testimonials Section -->
-<section class="py-20 bg-white">
+<section class="py-20 bg-white overflow-hidden">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
       <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">What Our Travelers Say</h2>
-      <p class="text-xl text-gray-600 max-w-2xl mx-auto">Read reviews from our satisfied customers who have experienced
-        unforgettable journeys with us.</p>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Read reviews from our satisfied customers who have experienced unforgettable journeys with us.
+      </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div *ngFor="let testimonial of testimonials" class="bg-gray-50 rounded-lg shadow-lg p-8">
-        <div class="flex text-yellow-400 mb-4">
-          <i *ngFor="let star of [1,2,3,4,5]" class="fas fa-star"></i>
-        </div>
-        <p class="text-gray-700 mb-6 italic">"{{testimonial.review}}"</p>
-        <div class="flex items-center">
-          <img [src]="testimonial.avatar" [alt]="testimonial.name" class="w-12 h-12 rounded-full mr-4">
-          <div>
-            <h4 class="font-semibold text-gray-800">{{testimonial.name}}</h4>
-            <p class="text-gray-600 text-sm">{{testimonial.location}}</p>
+    <!-- Scrolling Row -->
+    <div class="relative overflow-hidden">
+      <div class="flex animate-scroll space-x-6">
+        <div *ngFor="let testimonial of testimonials" class="bg-gray-50 rounded-lg shadow-lg p-8 w-80 flex-shrink-0">
+          <div class="flex text-yellow-400 mb-4">
+            <i *ngFor="let star of [].constructor(testimonial.rating)" class="fas fa-star"></i>
+          </div>
+          <p class="text-gray-700 mb-6 italic">"{{testimonial.review}}"</p>
+          <div class="flex items-center">
+            <img [src]="testimonial.avatar" [alt]="testimonial.name" class="w-12 h-12 rounded-full mr-4">
+            <div>
+              <h4 class="font-semibold text-gray-800">{{testimonial.name}}</h4>
+              <p class="text-gray-600 text-sm">{{testimonial.location}}</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- Newsletter Section -->
+<!-- Newsletter Section
 <section class="py-20 bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <h2 class="text-3xl md:text-4xl font-bold mb-4">Stay Updated</h2>
@@ -306,4 +309,4 @@
 
     <p class="text-sm mt-4 opacity-75">No spam, unsubscribe at any time.</p>
   </div>
-</section>
+</section> -->
