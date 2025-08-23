@@ -2,14 +2,6 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-20">
       <!-- Logo -->
-      <!-- <div class="flex items-center">
-        <a routerLink="/" class="flex items-center space-x-2">
-          <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-            <i class="fas fa-globe-americas text-white"></i>
-          </div>
-          <span class="text-2xl font-bold text-primary-600">GlobalEaseTrip</span>
-        </a>
-      </div> -->
       <div class="flex items-center">
         <a routerLink="/" class="flex items-center space-x-2">
           <div class="w-8 h-8 rounded-lg overflow-hidden">
@@ -70,7 +62,7 @@
       <div class="md:hidden flex items-center">
         <button
           (click)="toggleMobileMenu()"
-          class="text-gray-700 hover:text-primary-600 focus:outline-none"
+          class="text-white hover:text-primary-200 focus:outline-none"
         >
           <i class="fas fa-bars text-xl"></i>
         </button>
@@ -83,41 +75,41 @@
         <a
           routerLink="/"
           routerLinkActive="text-primary-600"
-          [routerLinkActiveOptions]="{ exact: true }"
+          [routerLinkActiveOptions]="{ exact: true }"  (click)="closeMenu()"
           class="text-gray-700 hover:text-primary-600 block px-3 py-2 rounded-md text-base font-medium"
         >
           Home
         </a>
         <a
           routerLink="/trips"
-          routerLinkActive="text-primary-600"
+          routerLinkActive="text-primary-600"  (click)="closeMenu()"
           class="text-gray-700 hover:text-primary-600 block px-3 py-2 rounded-md text-base font-medium"
         >
           Trips
         </a>
         <a
           routerLink="/about"
-          routerLinkActive="text-primary-600"
+          routerLinkActive="text-primary-600"  (click)="closeMenu()"
           class="text-gray-700 hover:text-primary-600 block px-3 py-2 rounded-md text-base font-medium"
         >
           About
         </a>
         <a
           routerLink="/blog"
-          routerLinkActive="text-primary-600"
+          routerLinkActive="text-primary-600"  (click)="closeMenu()"
           class="text-gray-700 hover:text-primary-600 block px-3 py-2 rounded-md text-base font-medium"
         >
           Blog
         </a>
         <a
           routerLink="/contact"
-          routerLinkActive="text-primary-600"
+          routerLinkActive="text-primary-600"  (click)="closeMenu()"
           class="text-gray-700 hover:text-primary-600 block px-3 py-2 rounded-md text-base font-medium"
         >
           Contact
         </a>
       </div>       
-       <button class="btn-primary w-full mt-2" (click)="openWhatsApp()" >Book Now</button>
+       <button class="btn-primary w-full mt-2" (click)="openWhatsApp()"  (click)="closeMenu()" >Book Now</button>
 
     </div>
   </div>

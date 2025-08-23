@@ -18,6 +18,9 @@ export class NavbarComponent {
   scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+  closeMenu() {
+    this.isMobileMenuOpen = false;
+  }
 
   openWhatsApp() {
   console.log('WhatsApp button clicked');
