@@ -519,5 +519,11 @@ export class TripsComponent implements OnInit {
   trackByTripId(index: number, trip: Trip): string {
     return trip.id;
   }
+  openWhatsApp() {
+    console.log('WhatsApp button clicked');
+    const phone = '918938962400';
+    const message = `I want to Inquiry about trips.`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+  }
 }
 

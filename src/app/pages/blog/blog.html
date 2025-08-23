@@ -118,15 +118,16 @@
     </p>
 
     <div class="flex flex-col sm:flex-row max-w-md mx-auto">
-      <input type="email" placeholder="Enter your email address"
+      <input type="email" placeholder="Enter your email address"  [(ngModel)]="email" 
         class="flex-1 px-6 py-4 rounded-l-lg sm:rounded-r-none rounded-r-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white">
-      <button
+      <button [disabled]="loading" (click)="subscribe()"
         class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-r-lg sm:rounded-l-none rounded-l-lg font-semibold transition-colors">
-        Subscribe
+        {{ loading ? 'Subscribing...' : 'Subscribe' }}
       </button>
-    </div>
 
-    <p class="text-sm mt-4 opacity-75">Join 500+ travelers who trust our recommendations.</p>
+    </div>
+    <p *ngIf="status" class="mt-2 text-sm">{{ status }}</p>
+    <p class="text-sm mt-4 opacity-75">Join 50+ travelers who trust our recommendations.</p>
   </div>
 </section>
 

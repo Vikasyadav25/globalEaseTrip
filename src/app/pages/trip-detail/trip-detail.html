@@ -38,11 +38,25 @@
           <i class="fas fa-calendar-check mr-2"></i>
           Book Now - ₹{{trip?.price | number}}
         </button>
-        <button (click)="shareTrip()"
+        <!-- <button (click)="shareTrip()"
           class="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold py-3 px-8 rounded-lg text-lg transition-colors">
           <i class="fas fa-share mr-2"></i>
           Share Trip
-        </button>
+        </button> -->
+
+        <div class="flex gap-3">
+          <!-- <a [href]="mailtoUrl"
+            class="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold py-3 px-8 rounded-lg text-lg transition-colors inline-block">
+            <i class="fas fa-envelope mr-2"></i>Email
+          </a> -->
+        
+          <a [href]="waUrl" target="_blank" rel="noopener"
+            class="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold py-3 px-8 rounded-lg text-lg transition-colors inline-block">
+            <i class="fab fa-whatsapp mr-2"></i>Share on WhatsApp
+          </a>
+        </div>
+
+
         <!-- <button (click)="shareTrip('email')"
           class="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold py-3 px-8 rounded-lg text-lg transition-colors">
           <i class="fas fa-share mr-2"></i><i class="fas fa-envelope mr-2"></i> Share Trip
@@ -217,7 +231,7 @@
             Book This Trip
           </button>
 
-          <button
+          <button (click)="openWhatsApp()"
             class="w-full border border-gray-300 text-gray-700 hover:bg-gray-50 py-3 rounded-lg transition-colors mb-4">
             <i class="fab fa-whatsapp mr-2 text-green-500"></i>
             WhatsApp Inquiry

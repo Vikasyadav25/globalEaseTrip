@@ -26,6 +26,13 @@ interface TripInclusion {
 export class TripDetailComponent implements OnInit {
   trip: Trip | null = null;
   selectedTab = 'overview';
+  shareSubject = '';
+  shareText = '';
+  mailtoUrl = '';
+  waUrl = '';
+
+  private readonly OWNER_WA = '918938962400';            // <- your WhatsApp number (no +, no spaces)
+  private readonly PROD_BASE = 'https://globaleasetrip.com';  // <- your live domain
 
   // Comprehensive trip data from the document
   allTrips: { [key: string]: any } = {
@@ -1364,27 +1371,113 @@ export class TripDetailComponent implements OnInit {
 
   ngOnInit() {
     // Get trip ID from route parameters
-    const tripId = this.route.snapshot.paramMap.get('id');
+    // const tripId = this.route.snapshot.paramMap.get('id');
 
-    if (tripId && this.allTrips[tripId]) {
-      this.trip = this.allTrips[tripId].trip;
-    } else {
-      // Default fallback trip
-      this.trip = {
-        id: 'default',
-        title: 'Amazing Adventure',
-        description: 'Discover incredible destinations and create unforgettable memories.',
-        location: 'Various Locations',
-        duration: '5 Days',
-        price: 15999,
-        image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=600&fit=crop',
-        rating: 4.5,
-        reviews: 100,
-        features: ['Adventure', 'Culture', 'Nature', 'Food'],
-        category: 'Adventure Tours'
-      };
-    }
+    // if (tripId && this.allTrips[tripId]) {
+    //   this.trip = this.allTrips[tripId].trip;
+    // } else {
+    //   // Default fallback trip
+    //   this.trip = {
+    //     id: 'default',
+    //     title: 'Amazing Adventure',
+    //     description: 'Discover incredible destinations and create unforgettable memories.',
+    //     location: 'Various Locations',
+    //     duration: '5 Days',
+    //     price: 15999,
+    //     image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=600&fit=crop',
+    //     rating: 4.5,
+    //     reviews: 100,
+    //     features: ['Adventure', 'Culture', 'Nature', 'Food'],
+    //     category: 'Adventure Tours'
+    //   };
+    // }
+
+    const tripId = this.route.snapshot.paramMap.get('id');
+    this.trip = tripId && this.allTrips[tripId] ? this.allTrips[tripId].trip : {
+      id: 'default',
+      title: 'Amazing Adventure',
+      description: 'Discover incredible destinations and create unforgettable memories.',
+      location: 'Various Locations',
+      duration: '5 Days',
+      price: 15999,
+      image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=600&fit=crop',
+      rating: 4.5,
+      reviews: 100,
+      features: ['Adventure', 'Culture', 'Nature', 'Food'],
+      category: 'Adventure Tours'
+    };
+    this.updateShareLinks();
   }
+//   private updateShareLinks() {
+//     if (!this.trip) return;
+
+//     const data = this.getCurrentTripData();
+//     const firstDays = (data?.itinerary || [])
+//       .slice(0, 3)
+//       .map((d: any) => `Day ${d.day}: ${d.title}`)
+//       .join('\n');
+
+//     this.shareSubject = `${this.trip.title} — ${this.trip.duration} · from ₹${this.trip.price}`;
+//     this.shareText =
+//       `${this.trip.title}
+// ${this.trip.location} • ${this.trip.duration}
+
+// ${this.trip.description}
+
+// Highlights: ${this.trip.features?.join(', ')}
+
+// ${firstDays ? `Itinerary preview:\n${firstDays}\n` : ''}More details: ${window.location.href}`;
+
+//     // email prefers CRLF
+//     const body = this.shareText.replace(/\n/g, '\r\n');
+
+//     this.mailtoUrl = `mailto:?subject=${encodeURIComponent(this.shareSubject)}&body=${encodeURIComponent(body)}`;
+//     this.waUrl = `https://wa.me/?text=${encodeURIComponent(this.shareText)}`;
+//   }
+
+  private updateShareLinks() {
+    if (!this.trip) return;
+
+    const trip = this.trip;
+    const data = this.getCurrentTripData();
+
+    const price = new Intl.NumberFormat('en-IN').format(trip.price);
+    const highlights = (trip.features || []).slice(0, 5).join(' • ');
+    const ratingLine = trip.rating
+      ? `★ ${trip.rating}/5${trip.reviews ? ` (${trip.reviews}+ reviews)` : ''}`
+      : '';
+
+    const itineraryPreview = (data?.itinerary || [])
+      .slice(0, 3)
+      .map((d: any) => `${d.day}) ${d.title}`)
+      .join('\n');
+
+    this.shareSubject = `${trip.title} — ${trip.duration} · from ₹${price}`;
+
+    // ASCII-only, WhatsApp-friendly text (no emojis)
+    this.shareText =
+      `*${trip.title}* · _${trip.duration}_
+${ratingLine}
+Location: ${trip.location}
+Price: From ₹${price} per person
+
+${trip.description}
+
+*Highlights:* ${highlights}
+
+*Itinerary at a glance*
+${itineraryPreview}
+
+More details & booking:
+${window.location.href}`;
+
+    // Email prefers CRLF
+    const emailBody = this.shareText.replace(/\n/g, '\r\n');
+    this.mailtoUrl = `mailto:?subject=${encodeURIComponent(this.shareSubject)}&body=${encodeURIComponent(emailBody)}`;
+    this.waUrl = `https://wa.me/?text=${encodeURIComponent(this.shareText)}`;
+  }
+
+
 
   getCurrentTripData() {
     if (!this.trip) return null;
@@ -1418,9 +1511,75 @@ export class TripDetailComponent implements OnInit {
     return Array(5 - Math.floor(rating)).fill(0);
   }
 
+  private getPublicUrl(): string {
+    const u = new URL(window.location.href);
+    const isLocal = u.hostname === 'localhost' || u.hostname === '127.0.0.1';
+    const isProd = u.hostname === 'globaleasetrip.com' || u.hostname === 'www.globaleasetrip.com';
+
+    if (isLocal) {
+      // Mirror current path/query/hash onto prod
+      return `https://globaleasetrip.com${u.pathname}${u.search}${u.hash}`;
+    }
+
+    if (isProd) {
+      // Ensure HTTPS on prod (and strip default :80/:443 if present)
+      const hostNoDefaultPort = u.host.replace(/:80$|:443$/, '');
+      return `https://${hostNoDefaultPort}${u.pathname}${u.search}${u.hash}`;
+    }
+
+    // Any other host: prefer HTTPS, otherwise keep as-is
+    return u.protocol === 'http:'
+      ? `https://${u.host}${u.pathname}${u.search}${u.hash}`
+      : u.href;
+  }
+
+  private buildWhatsAppUrl(text: string, phone?: string): string {
+    const url = new URL('https://api.whatsapp.com/send'); // works for Web & Mobile
+    if (phone) url.searchParams.set('phone', phone);
+    url.searchParams.set('text', text); // auto-encodes; DON'T encodeURIComponent again
+    return url.toString();
+  }
+
   openBookingForm() {
-    // In a real app, this would open a booking modal or redirect to booking page
-    alert('Booking functionality will be Launching Soon! For now, please contact us directly on Whatsapp!');
+    if (!this.trip) return;
+
+    const t = this.trip;
+    const price = new Intl.NumberFormat('en-IN').format(t.price);
+    const link = this.getPublicUrl();
+
+    const msg = [
+      `Hi! I'd like to book:`,
+      ``,
+      `*${t.title}* · _${t.duration}_`,
+      `${t.location} • From ₹${price} per person`,
+      ``,
+      `Please confirm availability and next steps.`,
+      ``,
+      `— My details —`,
+      `Preferred dates: [dd-mm-yyyy] to [dd-mm-yyyy]`,
+      `Travellers: Adults __ | Children __`,
+      `Pickup city: [Your city]`,
+      `Special requests: [optional]`,
+      ``,
+      `Trip link:`,
+      link
+    ].join('\n').trim();
+
+    const waUrl = this.buildWhatsAppUrl(msg, this.OWNER_WA);
+
+    // Most reliable redirect for WhatsApp Web
+    try {
+      window.location.href = waUrl;
+    } catch {
+      // Fallback if something blocks location change
+      const a = document.createElement('a');
+      a.href = waUrl;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
   }
 
   shareTrip() {
@@ -1435,6 +1594,16 @@ export class TripDetailComponent implements OnInit {
       navigator.clipboard.writeText(window.location.href);
       alert('Link copied to clipboard!');
     }
+  }
+
+
+  openWhatsApp() {
+    if (!this.trip) return;
+    const t = this.trip;
+    console.log('WhatsApp button clicked');
+    const phone = '918938962400';
+    const message = `I want to Inquiry about this trip ${t.title}`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
   }
 }
 
