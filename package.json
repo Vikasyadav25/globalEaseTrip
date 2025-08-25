@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+      "deploy": "ng build --configuration production --base-href / && npx angular-cli-ghpages --dir=dist/globalEaseTrip/browser",
     "test": "ng test"
   },
   "prettier": {
@@ -36,6 +37,7 @@
     "@angular/cli": "^20.0.4",
     "@angular/compiler-cli": "^20.0.0",
     "@types/jasmine": "~5.1.0",
+    "angular-cli-ghpages": "^2.0.3",
     "autoprefixer": "^10.4.21",
     "jasmine-core": "~5.7.0",
     "karma": "~6.4.0",

@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
   journeyCategories = {
     traveller: [
       {
-        title: 'Faimly',
+        title: 'Family',
         description: 'Perfect for creating memories together',
         image: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400&h=500&fit=crop',
         type: 'family'
@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
         type: 'groups'
       },
       {
-        title: 'Honymoon',
+        title: 'Honeymoon',
         description: 'Celebrate your new beginning',
         image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=500&fit=crop',
         type: 'honeymoon'
