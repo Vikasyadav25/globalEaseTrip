@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://globaleasetrip.com/sitemap.xml
